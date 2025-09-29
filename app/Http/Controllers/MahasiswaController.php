@@ -19,7 +19,7 @@ class MahasiswaController extends Controller
      */
     public function create()
     {
-        //
+        //makan ayam
     }
 
     /**
