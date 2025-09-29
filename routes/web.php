@@ -43,3 +43,7 @@ Route::get('/about', function () {
 Route::get('/home',[HomeController::class,'index']);
 
 Route::get('/pegawai', [PegawaiController::class, 'index']);
+
+//question
+Route::post('question/store', [QuestionController::class, 'store'])
+		->name('question.store');
