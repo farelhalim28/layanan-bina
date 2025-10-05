@@ -48,3 +48,17 @@ Route::get('/pegawai', [PegawaiController::class, 'index']);
 //question
 Route::post('question/store', [QuestionController::class, 'store'])
 		->name('question.store');
+
+   // AuthController (untuk login)
+
+use App\Http\Controllers\AuthController;
+
+// Menampilkan halaman login
+Route::get('/auth', [AuthController::class, 'index']);
+
+// Memproses form login
+Route::post('/auth/login', [AuthController::class, 'login']);
+
+// Menampilkan halaman berhasil login
+Route::get('/auth/berhasil', [AuthController::class, 'berhasil']);
+
