@@ -1,0 +1,8 @@
+@font-face {
+    font-family: 'bit';
+    src: url('assets/fonts/bit.ttf');
+}
+
+.font-custom{
+    font-family: 'bit';
+}

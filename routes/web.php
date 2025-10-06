@@ -1,10 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\QuestionController;
-use App\Http\Controllers\MahasiswaController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -51,7 +51,8 @@ Route::post('question/store', [QuestionController::class, 'store'])
 
    // AuthController (untuk login)
 
-use App\Http\Controllers\AuthController;
+
+use App\Http\Controllers\MahasiswaController;
 
 // Menampilkan halaman login
 Route::get('/auth', [AuthController::class, 'index']);
@@ -62,3 +63,6 @@ Route::post('/auth/login', [AuthController::class, 'login']);
 // Menampilkan halaman berhasil login
 Route::get('/auth/berhasil', [AuthController::class, 'berhasil']);
 
+// dashboard
+use App\Http\Controllers\DashboardController;
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');

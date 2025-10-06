@@ -50,6 +50,7 @@
             color: #6c757d;
         }
     </style>
+    	<link rel="stylesheet" href="{{ asset('assets/css/custom-style.css') }}">
 </head>
 
 <body>
@@ -82,7 +83,7 @@
     <!-- Hero Section -->
     <section class="hero-section">
         <div class="container">
-            <h1 class="display-6 mb-2">Welcome Aboard!</h1>
+            <h1 class="display-6 mb-2 font-custom">Welcome Aboard!</h1>
             <p class="lead mb-0">A simple and elegant app using Bootstrap 5 and Laravel Blade.</p>
         </div>
     </section>
@@ -167,7 +168,7 @@
         </div>
     @endif
 </div>
-
+<img src="{{ asset('assets/images/logo.jpg') }}" alt="Logo">
         <h5 class="card-title">Form Pertanyaan</h5>
 <form action="{{ route('question.store') }}" method="POST">
 	@csrf
