@@ -4,31 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Admin;
 
 class AuthController extends Controller
 {
-    // Data statis admin untuk development
-    private static $admins = [
-        [
-            'id' => 1,
-            'nama' => 'Admin Desa',
-            'email' => 'admin@desa.com',
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-            'role' => 'admin',
-            'created_at' => '2024-01-01 00:00:00'
-        ],
-        [
-            'id' => 2,
-            'nama' => 'Super Admin',
-            'email' => 'superadmin@desa.com',
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-            'role' => 'admin',
-            'created_at' => '2024-02-01 00:00:00'
-        ]
-    ];
-
     /**
-     * Tampilkan form login admin
+     * Tampilkan form login
      */
     public function showLoginForm()
     {
@@ -39,7 +20,7 @@ class AuthController extends Controller
     }
 
     /**
-     * Proses login admin
+     * Proses login
      */
     public function login(Request $request)
     {
@@ -48,22 +29,29 @@ class AuthController extends Controller
             'password' => 'required',
         ]);
 
-        $admin = collect(self::$admins)->firstWhere('email', $request->email);
+        // Cari admin di database
+        $admin = Admin::where('email', $request->email)->first();
 
         if (!$admin) {
             return back()->withErrors(['email' => 'Email tidak ditemukan'])->withInput();
         }
 
-        if (!Hash::check($request->password, $admin['password'])) {
+        if (!Hash::check($request->password, $admin->password)) {
             return back()->withErrors(['password' => 'Password salah'])->withInput();
         }
 
-        session(['user' => $admin]);
+        // Simpan session
+        session(['user' => [
+            'id' => $admin->id,
+            'nama' => $admin->nama,
+            'email' => $admin->email
+        ]]);
+
         return redirect()->route('admin.dashboard')->with('success', 'Login berhasil!');
     }
 
     /**
-     * Tampilkan form registrasi admin
+     * Tampilkan form register
      */
     public function showRegisterForm()
     {
@@ -74,18 +62,23 @@ class AuthController extends Controller
     }
 
     /**
-     * Proses registrasi admin
+     * Proses register
      */
     public function register(Request $request)
     {
         $request->validate([
             'nama' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
+            'email' => 'required|email|unique:admins,email',
             'password' => 'required|min:6|confirmed',
         ]);
 
-        session()->flash('success', 'Registrasi berhasil! Silakan login.');
-        return redirect()->route('admin.login');
+        Admin::create([
+            'nama' => $request->nama,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
+
+        return redirect()->route('admin.login')->with('success', 'Registrasi berhasil! Silakan login.');
     }
 
     /**

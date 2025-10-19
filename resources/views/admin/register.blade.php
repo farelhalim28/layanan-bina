@@ -9,17 +9,17 @@
     <link rel="stylesheet" href="{{ asset('assets-admin/vendors/bootstrap-icons/bootstrap-icons.css') }}">
     <link rel="stylesheet" href="{{ asset('assets-admin/css/app.css') }}">
     <style>
-        body { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 40px 0; }
+        body { background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%); padding: 40px 0; }
         #auth { min-height: 100vh; }
         .auth-logo h2 { color: white; font-weight: 700; font-size: 36px; text-shadow: 2px 2px 4px rgba(0,0,0,0.2); }
         .auth-logo p { color: rgba(255,255,255,0.9); }
         .card { border-radius: 1.5rem; box-shadow: 0 20px 60px rgba(0,0,0,0.2); border: none; }
         .card-header { background: white; border-bottom: 0; padding-top: 35px; }
-        .card-header h4 { color: #435ebe; font-weight: 700; }
+        .card-header h4 { color: #27ae60; font-weight: 700; }
         .form-control { border-radius: 0.7rem; padding: 13px 15px; border: 2px solid #e0e0e0; }
-        .form-control:focus { border-color: #435ebe; box-shadow: 0 0 0 0.2rem rgba(67, 94, 190, 0.15); }
-        .btn-primary { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border: none; padding: 14px; border-radius: 0.7rem; font-weight: 600; }
-        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4); }
+        .form-control:focus { border-color: #27ae60; box-shadow: 0 0 0 0.2rem rgba(39, 174, 96, 0.15); }
+        .btn-primary { background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%); border: none; padding: 14px; border-radius: 0.7rem; font-weight: 600; }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(46, 204, 113, 0.4); }
         .required { color: #dc3545; }
     </style>
 </head>
@@ -65,26 +65,17 @@
 
                                 <div class="mb-3">
                                     <label for="nama" class="form-label">Nama Lengkap <span class="required">*</span></label>
-                                    <input type="text" id="nama" name="nama" class="form-control @error('nama') is-invalid @enderror" placeholder="Masukkan nama lengkap" value="{{ old('nama') }}" required autofocus>
-                                    @error('nama')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
+                                    <input type="text" id="nama" name="nama" class="form-control" placeholder="Masukkan nama lengkap" value="{{ old('nama') }}" required autofocus>
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="email" class="form-label">Email <span class="required">*</span></label>
-                                    <input type="email" id="email" name="email" class="form-control @error('email') is-invalid @enderror" placeholder="admin@desa.com" value="{{ old('email') }}" required>
-                                    @error('email')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
+                                    <input type="email" id="email" name="email" class="form-control" placeholder="admin@desa.com" value="{{ old('email') }}" required>
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="password" class="form-label">Password <span class="required">*</span></label>
-                                    <input type="password" id="password" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="Minimal 6 karakter" required>
-                                    @error('password')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
+                                    <input type="password" id="password" name="password" class="form-control" placeholder="Minimal 6 karakter" required>
                                 </div>
 
                                 <div class="mb-4">
@@ -99,7 +90,7 @@
 
                             <div class="text-center mt-3">
                                 <p class="text-muted mb-0">
-                                    Sudah punya akun? <a href="{{ route('admin.login') }}" class="fw-bold">Login di sini</a>
+                                    Sudah punya akun? <a href="{{ route('admin.login') }}" class="fw-bold text-success">Login di sini</a>
                                 </p>
                             </div>
                         </div>

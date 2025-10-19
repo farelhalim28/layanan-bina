@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Warga;
+use App\Models\JenisSurat;
 
 class DashboardController extends Controller
 {
@@ -11,7 +13,18 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('admin.dashboard');
+        // Ambil data statistik
+        $stats = [
+            'total_warga' => Warga::count(),
+            'total_jenis_surat' => JenisSurat::count(),
+        ];
+
+        // Ambil data terbaru (5 terakhir)
+        $warga = Warga::latest()->take(5)->get();
+        $jenis_surat = JenisSurat::latest()->take(5)->get();
+
+        // Kirim ke view
+        return view('admin.dashboard', compact('stats', 'warga', 'jenis_surat'));
     }
 
     /**
