@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use App\Models\Admin;
+use App\Models\User;
 
 class AuthController extends Controller
 {
@@ -29,22 +29,21 @@ class AuthController extends Controller
             'password' => 'required',
         ]);
 
-        // Cari admin di database
-        $admin = Admin::where('email', $request->email)->first();
+        $user = User::where('email', $request->email)->first();
 
-        if (!$admin) {
+        if (!$user) {
             return back()->withErrors(['email' => 'Email tidak ditemukan'])->withInput();
         }
 
-        if (!Hash::check($request->password, $admin->password)) {
+        if (!Hash::check($request->password, $user->password)) {
             return back()->withErrors(['password' => 'Password salah'])->withInput();
         }
 
-        // Simpan session
+        // Simpan session user
         session(['user' => [
-            'id' => $admin->id,
-            'nama' => $admin->nama,
-            'email' => $admin->email
+            'id' => $user->id,
+            'name' => $user->name,
+            'email' => $user->email,
         ]]);
 
         return redirect()->route('admin.dashboard')->with('success', 'Login berhasil!');
@@ -67,13 +66,13 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         $request->validate([
-            'nama' => 'required|string|max:255',
-            'email' => 'required|email|unique:admins,email',
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email',
             'password' => 'required|min:6|confirmed',
         ]);
 
-        Admin::create([
-            'nama' => $request->nama,
+        User::create([
+            'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);

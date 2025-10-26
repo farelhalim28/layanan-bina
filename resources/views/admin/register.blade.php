@@ -41,6 +41,7 @@
                             <p class="text-muted mb-0">Buat akun administrator baru</p>
                         </div>
                         <div class="card-body">
+                            {{-- Pesan Sukses --}}
                             @if(session('success'))
                             <div class="alert alert-success alert-dismissible fade show">
                                 {{ session('success') }}
@@ -48,6 +49,7 @@
                             </div>
                             @endif
 
+                            {{-- Pesan Error --}}
                             @if($errors->any())
                             <div class="alert alert-danger alert-dismissible fade show">
                                 <strong>Terdapat kesalahan:</strong>
@@ -64,8 +66,8 @@
                                 @csrf
 
                                 <div class="mb-3">
-                                    <label for="nama" class="form-label">Nama Lengkap <span class="required">*</span></label>
-                                    <input type="text" id="nama" name="nama" class="form-control" placeholder="Masukkan nama lengkap" value="{{ old('nama') }}" required autofocus>
+                                    <label for="name" class="form-label">Nama Lengkap <span class="required">*</span></label>
+                                    <input type="text" id="name" name="name" class="form-control" placeholder="Masukkan nama lengkap" value="{{ old('name') }}" required autofocus>
                                 </div>
 
                                 <div class="mb-3">
