@@ -6,12 +6,12 @@ use Illuminate\Http\Request;
 use App\Models\Warga;
 use App\Models\JenisSurat;
 use App\Models\User;
+use App\Models\Media; // tambahkan ini!
 
 class DashboardController extends Controller
 {
     public function index()
     {
-        // Cek session (proteksi sederhana)
         if (!session('user')) {
             return redirect()->route('admin.login')->with('error', 'Silakan login terlebih dahulu!');
         }
@@ -25,7 +25,8 @@ class DashboardController extends Controller
         $warga = Warga::latest()->take(5)->get();
         $jenis_surat = JenisSurat::latest()->take(5)->get();
         $users = User::latest()->take(5)->get();
+        $media = Media::latest()->get();
 
-        return view('admin.dashboard', compact('stats', 'warga', 'jenis_surat', 'users'));
+        return view('admin.dashboard', compact('stats', 'warga', 'jenis_surat', 'users', 'media'));
     }
 }

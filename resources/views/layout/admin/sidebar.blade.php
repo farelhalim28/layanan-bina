@@ -35,6 +35,11 @@
                         <i class="bi bi-person-badge-fill"></i><span>Data User</span>
                     </a>
                 </li>
+                 <li class="sidebar-item {{ request()->routeIs('admin.media.*') ? 'active' : '' }}">
+                    <a href="{{ route('admin.media.index') }}" class='sidebar-link'>
+                        <i class="bi bi-person-badge-fill"></i><span>Media</span>
+                    </a>
+                </li>
 
                 <li class="sidebar-title">Akun</li>
                 <li class="sidebar-item">
