@@ -14,7 +14,7 @@ class UserController extends Controller
     public function index()
     {
         $users = User::latest()->get();
-        return view('admin.user.index', compact('users'));
+        return view('pages.user.index', compact('users'));
     }
 
     /**
@@ -22,7 +22,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('admin.user.create');
+        return view('pages.user.create');
     }
 
     /**
@@ -56,7 +56,7 @@ class UserController extends Controller
     public function show($id)
     {
         $user = User::findOrFail($id);
-        return view('admin.user.show', compact('user'));
+        return view('pages.user.show', compact('user'));
     }
 
     /**
@@ -65,7 +65,7 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::findOrFail($id);
-        return view('admin.user.edit', compact('user'));
+        return view('pages.user.edit', compact('user'));
     }
 
     /**

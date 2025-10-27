@@ -17,22 +17,19 @@
                         <i class="bi bi-grid-fill"></i><span>Dashboard</span>
                     </a>
                 </li>
-
-                <li class="sidebar-item {{ request()->routeIs('admin.warga.*') ? 'active' : '' }}">
-                    <a href="{{ route('admin.warga.index') }}" class='sidebar-link'>
-                        <i class="bi bi-people-fill"></i><span>Data Warga</span>
-                    </a>
-                </li>
-
                 <li class="sidebar-item {{ request()->routeIs('admin.jenis-surat.*') ? 'active' : '' }}">
                     <a href="{{ route('admin.jenis-surat.index') }}" class='sidebar-link'>
                         <i class="bi bi-folder-fill"></i><span>Jenis Surat</span>
                     </a>
                 </li>
-
                 <li class="sidebar-item {{ request()->routeIs('admin.user.*') ? 'active' : '' }}">
                     <a href="{{ route('admin.user.index') }}" class='sidebar-link'>
                         <i class="bi bi-person-badge-fill"></i><span>Data User</span>
+                    </a>
+                </li>
+                <li class="sidebar-item {{ request()->routeIs('admin.warga.*') ? 'active' : '' }}">
+                    <a href="{{ route('admin.warga.index') }}" class='sidebar-link'>
+                        <i class="bi bi-people-fill"></i><span>Data Warga</span>
                     </a>
                 </li>
                  <li class="sidebar-item {{ request()->routeIs('admin.media.*') ? 'active' : '' }}">

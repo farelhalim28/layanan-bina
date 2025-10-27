@@ -13,15 +13,15 @@ class WargaController extends Controller
     public function index()
     {
         $warga = Warga::latest()->get();
-        return view('admin.warga.index', compact('warga'));
+        return view('pages.warga.index', compact('warga'));
     }
 
-    /**      
+    /**
      * Show the form for creating a new resource (CREATE - FORM)
      */
     public function create()
     {
-        return view('admin.warga.create');
+        return view('pages.warga.create');
     }
 
     /**
@@ -61,7 +61,7 @@ class WargaController extends Controller
     public function show($id)
     {
         $warga = Warga::findOrFail($id);
-        return view('admin.warga.show', compact('warga'));
+        return view('pages.warga.show', compact('warga'));
     }
 
     /**
@@ -70,7 +70,7 @@ class WargaController extends Controller
     public function edit($id)
     {
         $warga = Warga::findOrFail($id);
-        return view('admin.warga.edit', compact('warga'));
+        return view('pages.warga.edit', compact('warga'));
     }
 
     /**

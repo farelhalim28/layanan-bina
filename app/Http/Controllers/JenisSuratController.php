@@ -10,12 +10,12 @@ class JenisSuratController extends Controller
     public function index()
     {
         $jenis_surat = JenisSurat::latest()->get();
-        return view('admin.jenis_surat.index', compact('jenis_surat'));
+        return view('pages.jenis_surat.index', compact('jenis_surat'));
     }
 
     public function create()
     {
-        return view('admin.jenis_surat.create');
+        return view('pages.jenis_surat.create');
     }
 
     public function store(Request $request)
@@ -35,13 +35,13 @@ class JenisSuratController extends Controller
     public function show($id)
     {
         $jenisSurat = JenisSurat::findOrFail($id);
-        return view('admin.jenis_surat.show', compact('jenisSurat'));
+        return view('pages.jenis_surat.show', compact('jenisSurat'));
     }
 
     public function edit($id)
     {
         $jenisSurat = JenisSurat::findOrFail($id);
-        return view('admin.jenis_surat.edit', compact('jenisSurat'));
+        return view('pages.jenis_surat.edit', compact('jenisSurat'));
     }
 
     public function update(Request $request, $id)

@@ -32,7 +32,7 @@ Route::get('/admin/register', [AuthController::class, 'showRegisterForm'])->name
 Route::post('/admin/register', [AuthController::class, 'register'])->name('admin.register.post');
 
 // =====================
-// ADMIN AREA (Protected)
+// admin AREA (Protected)
 // =====================
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');

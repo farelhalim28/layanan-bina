@@ -27,6 +27,6 @@ class DashboardController extends Controller
         $users = User::latest()->take(5)->get();
         $media = Media::latest()->get();
 
-        return view('admin.dashboard', compact('stats', 'warga', 'jenis_surat', 'users', 'media'));
+        return view('pages.dashboard', compact('stats', 'warga', 'jenis_surat', 'users', 'media'));
     }
 }

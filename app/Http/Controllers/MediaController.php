@@ -17,7 +17,7 @@ class MediaController extends Controller
                       ->orderBy('created_at', 'desc')
                       ->get();
 
-        return view('admin.media.index', compact('media'));
+        return view('pages.media.index', compact('media'));
     }
 
     /**
@@ -25,7 +25,7 @@ class MediaController extends Controller
      */
     public function create()
     {
-        return view('admin.media.create');
+        return view('pages.media.create');
     }
 
     /**
@@ -67,7 +67,7 @@ class MediaController extends Controller
     public function show($id)
     {
         $media = Media::findOrFail($id);
-        return view('admin.media.show', compact('media'));
+        return view('pages.media.show', compact('media'));
     }
 
     /**
@@ -76,7 +76,7 @@ class MediaController extends Controller
     public function edit($id)
     {
         $media = Media::findOrFail($id);
-        return view('admin.media.edit', compact('media'));
+        return view('pages.media.edit', compact('media'));
     }
 
     /**

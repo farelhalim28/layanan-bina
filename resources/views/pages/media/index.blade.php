@@ -1,4 +1,4 @@
-@extends('layout.admin.app')
+@extends('layouts.admin.app')
 
 @section('title', 'Data Media')
 

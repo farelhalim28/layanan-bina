@@ -16,7 +16,7 @@ class AuthController extends Controller
         if (session('user')) {
             return redirect()->route('admin.dashboard');
         }
-        return view('admin.login');
+        return view('pages.auth.login');
     }
 
     /**
@@ -57,7 +57,7 @@ class AuthController extends Controller
         if (session('user')) {
             return redirect()->route('admin.dashboard');
         }
-        return view('admin.register');
+        return view('pages.auth.register');
     }
 
     /**
