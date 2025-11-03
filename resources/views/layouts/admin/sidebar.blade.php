@@ -10,18 +10,18 @@
 
         <div class="sidebar-menu">
             <ul class="menu">
-                <li class="sidebar-title">Menu</li>
-
                 <li class="sidebar-item {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
                     <a href="{{ route('admin.dashboard') }}" class='sidebar-link'>
                         <i class="bi bi-grid-fill"></i><span>Dashboard</span>
                     </a>
                 </li>
+                <li class="sidebar-title">Menu Utama</li>
                 <li class="sidebar-item {{ request()->routeIs('admin.jenis-surat.*') ? 'active' : '' }}">
                     <a href="{{ route('admin.jenis-surat.index') }}" class='sidebar-link'>
                         <i class="bi bi-folder-fill"></i><span>Jenis Surat</span>
                     </a>
                 </li>
+                <li class="sidebar-title">Master Data</li>
                 <li class="sidebar-item {{ request()->routeIs('admin.user.*') ? 'active' : '' }}">
                     <a href="{{ route('admin.user.index') }}" class='sidebar-link'>
                         <i class="bi bi-person-badge-fill"></i><span>Data User</span>

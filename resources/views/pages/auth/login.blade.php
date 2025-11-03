@@ -9,49 +9,74 @@
     <link rel="stylesheet" href="{{ asset('assets-admin/vendors/bootstrap-icons/bootstrap-icons.css') }}">
     <link rel="stylesheet" href="{{ asset('assets-admin/css/app.css') }}">
     <style>
+        /* ===== Background Image Full ===== */
         body {
-            background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+            background: url('{{ asset('assets-admin/images/bg/bg-desa.jpg') }}') no-repeat center center fixed;
+            background-size: cover;
             font-family: 'Nunito', sans-serif;
+            position: relative;
+            z-index: 0;
         }
+
+        /* ===== Overlay Hijau Transparan ===== */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background: rgba(39, 174, 96, 0.45);
+            z-index: 0;
+        }
+
         #auth {
             padding: 50px 0;
             min-height: 100vh;
             display: flex;
             align-items: center;
+            position: relative;
+            z-index: 1;
         }
+
         .auth-logo h2 {
             color: white;
             font-weight: 800;
             font-size: 38px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
         }
+
         .auth-logo p {
             color: rgba(255,255,255,0.95);
             font-size: 15px;
         }
+
         .card {
             border-radius: 1.5rem;
             box-shadow: 0 20px 60px rgba(0,0,0,0.25);
             border: none;
+            background: white;
         }
+
         .card-header {
             background: white;
             border-bottom: 0;
             padding-top: 35px;
         }
+
         .card-header h4 {
             color: #27ae60;
             font-weight: 700;
         }
+
         .form-control {
             border-radius: 0.7rem;
             padding: 13px 15px;
             border: 2px solid #e0e0e0;
         }
+
         .form-control:focus {
             border-color: #27ae60;
             box-shadow: 0 0 0 0.2rem rgba(39, 174, 96, 0.15);
         }
+
         .btn-primary {
             background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
             border: none;
@@ -59,32 +84,34 @@
             border-radius: 0.7rem;
             font-weight: 600;
         }
+
         .btn-primary:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 20px rgba(46, 204, 113, 0.4);
         }
+
         .module-info {
             background: rgba(255,255,255,0.15);
             padding: 20px;
             border-radius: 15px;
             margin-bottom: 25px;
+            backdrop-filter: blur(6px);
         }
-        .module-info img {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            border: 3px solid white;
-            margin-bottom: 10px;
-        }
+
         .module-info h3 {
             color: #fff;
             font-weight: 700;
             margin-bottom: 5px;
         }
+
         .module-info p {
             color: rgba(255,255,255,0.9);
             font-size: 14px;
             line-height: 1.4;
+        }
+
+        footer small {
+            color: rgba(255,255,255,0.9);
         }
     </style>
 </head>
@@ -161,9 +188,9 @@
                     </div>
 
                     <!-- Footer Info -->
-                    <div class="text-center mt-4 text-white">
+                    <footer class="text-center mt-4">
                         <small>© 2025 Sistem Bina Desa | Pengembangan Modul Rekan-Rekan</small>
-                    </div>
+                    </footer>
 
                 </div>
             </div>
