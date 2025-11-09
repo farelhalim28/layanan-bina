@@ -28,33 +28,59 @@
             align-items: center;
         }
 
-        /* Floating WhatsApp Button Styling */
+        /* Floating WhatsApp Button Styling - FIXED */
         .float-whatsapp {
             position: fixed;
             width: 60px;
             height: 60px;
-            bottom: 25px;
-            right: 25px;
+            bottom: 30px;
+            right: 30px;
             background-color: #25D366;
             color: #fff;
             border-radius: 50%;
-            text-align: center;
-            font-size: 30px;
-            line-height: 60px; /* vertikal tengah */
-            box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
             z-index: 1000;
             transition: all 0.3s ease;
+            text-decoration: none;
         }
 
         .float-whatsapp:hover {
             background-color: #20b358;
             transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(37, 211, 102, 0.5);
             color: #fff;
         }
 
         .float-whatsapp i {
-            vertical-align: middle;
-            display: inline-block;
+            font-size: 32px;
+            line-height: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Animasi Pulse untuk menarik perhatian */
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 15px rgba(37, 211, 102, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+            }
+        }
+
+        .float-whatsapp {
+            animation: pulse 2s infinite;
+        }
+
+        .float-whatsapp:hover {
+            animation: none;
         }
     </style>
 </head>

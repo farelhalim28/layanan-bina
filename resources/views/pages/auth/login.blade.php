@@ -123,7 +123,7 @@
 
                     <!-- Modul Identitas -->
                     <div class="text-center module-info">
-                        <h3>Modul Layanan Mandiri</h3>
+                        <h3>Layanan Mandiri & Surat</h3>
                         <p>
                             Aplikasi ini memudahkan warga untuk mengakses layanan administrasi desa secara cepat dan transparan.
                             Data terintegrasi langsung ke sistem utama Bina Desa.
@@ -134,7 +134,7 @@
                     <div class="text-center mb-4">
                         <div class="auth-logo">
                             <h2>🏘️ Bina Desa</h2>
-                            <p>Sistem Layanan Mandiri & Digitalisasi Surat Desa</p>
+                            <p>Sistem Layanan Mandiri & Surat</p>
                         </div>
                     </div>
 
