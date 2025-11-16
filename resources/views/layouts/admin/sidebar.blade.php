@@ -21,6 +21,16 @@
                         <i class="bi bi-folder-fill"></i><span>Jenis Surat</span>
                     </a>
                 </li>
+                <li class="sidebar-item {{ request()->routeIs('admin.permohonan-surat.*') ? 'active' : '' }}">
+                    <a href="{{ route('admin.permohonan-surat.index') }}" class='sidebar-link'>
+                        <i class="bi bi-folder-fill"></i><span>Permohanan Surat</span>
+                    </a>
+                </li>
+                <li class="sidebar-item {{ request()->routeIs('admin.berkas-persyaratan.*') ? 'active' : '' }}">
+                    <a href="{{ route('admin.berkas-persyaratan.index') }}" class='sidebar-link'>
+                        <i class="bi bi-folder-fill"></i><span>Berkas Persyaratan</span>
+                    </a>
+                </li>
                 <li class="sidebar-title">Master Data</li>
                 <li class="sidebar-item {{ request()->routeIs('admin.user.*') ? 'active' : '' }}">
                     <a href="{{ route('admin.user.index') }}" class='sidebar-link'>
