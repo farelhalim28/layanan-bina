@@ -19,7 +19,6 @@ class DatabaseSeeder extends Seeder
             'name' => 'Admin Pertama',
             'email' => 'admin@example.com',
             'password' => Hash::make('password123'),
-            'role' => 'admin'
         ]);
 
         // Seeder Relasi Permohonan Surat dan Berkas Persyaratan
