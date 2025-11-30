@@ -11,9 +11,29 @@ class UserController extends Controller
     /**
      * Tampilkan daftar user
      */
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::latest()->get();
+        // Kolom yang bisa di-search
+        $searchableColumns = ['name', 'email'];
+
+        // Query dengan filter custom, search, dan pagination
+        $query = User::query();
+
+        // Filter berdasarkan status verifikasi email
+        if ($request->filled('email_verified')) {
+            if ($request->email_verified == 'verified') {
+                $query->whereNotNull('email_verified_at');
+            } elseif ($request->email_verified == 'unverified') {
+                $query->whereNull('email_verified_at');
+            }
+        }
+
+        // Search
+        $users = $query->search($request, $searchableColumns)
+                       ->latest()
+                       ->paginate(10)
+                       ->withQueryString();
+
         return view('pages.user.index', compact('users'));
     }
 

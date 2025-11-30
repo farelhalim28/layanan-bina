@@ -9,67 +9,57 @@ class Media extends Model
 {
     use HasFactory;
 
-    /**
-     * Nama tabel di database
-     */
     protected $table = 'media';
-
-    /**
-     * Primary key
-     */
     protected $primaryKey = 'media_id';
 
-    /**
-     * Kolom yang bisa diisi (mass assignment)
-     */
     protected $fillable = [
         'ref_table',
         'ref_id',
-        'file_url',
+        'file_name',
         'caption',
         'mime_type',
-        'sort_order',
+        'sort_order'
     ];
 
     /**
-     * Casting tipe data
+     * Scope untuk mendapatkan media berdasarkan referensi
      */
-    protected $casts = [
-        'ref_id' => 'integer',
-        'sort_order' => 'integer',
-    ];
-
-    /**
-     * Accessor untuk mendapatkan full URL file
-     */
-    public function getFullUrlAttribute()
+    public function scopeByReference($query, $refTable, $refId)
     {
-        return asset('storage/' . $this->file_url);
+        return $query->where('ref_table', $refTable)
+                     ->where('ref_id', $refId)
+                     ->orderBy('sort_order');
     }
 
     /**
-     * Accessor untuk cek apakah file adalah gambar
+     * Cek apakah file adalah gambar
      */
-    public function getIsImageAttribute()
+    public function isImage()
     {
         return str_starts_with($this->mime_type, 'image/');
     }
 
     /**
-     * Accessor untuk mendapatkan icon berdasarkan mime type
+     * Cek apakah file adalah video
      */
-    public function getFileIconAttribute()
+    public function isVideo()
     {
-        if ($this->is_image) {
-            return 'bi-image';
-        } elseif (str_contains($this->mime_type, 'pdf')) {
-            return 'bi-file-pdf';
-        } elseif (str_contains($this->mime_type, 'word')) {
-            return 'bi-file-word';
-        } elseif (str_contains($this->mime_type, 'excel') || str_contains($this->mime_type, 'spreadsheet')) {
-            return 'bi-file-excel';
-        } else {
-            return 'bi-file-earmark';
-        }
+        return str_starts_with($this->mime_type, 'video/');
+    }
+
+    /**
+     * Cek apakah file adalah PDF
+     */
+    public function isPdf()
+    {
+        return $this->mime_type === 'application/pdf';
+    }
+
+    /**
+     * Cek apakah file adalah dokumen lain (word, zip, dll)
+     */
+    public function isFile()
+    {
+        return !$this->isImage() && !$this->isVideo() && !$this->isPdf();
     }
 }

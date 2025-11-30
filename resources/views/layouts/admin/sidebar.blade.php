@@ -31,6 +31,12 @@
                         <i class="bi bi-folder-fill"></i><span>Berkas Persyaratan</span>
                     </a>
                 </li>
+                <li class="sidebar-item {{ request()->routeIs('riwayat-status.*') ? 'active' : '' }}">
+                    <a href="{{ route('admin.riwayat-status.index') }}" class='sidebar-link'>
+                        <i class="bi bi-folder-fill"></i><span>Riwayat Status Surat</span>
+                    </a>
+                </li>
+
                 <li class="sidebar-title">Master Data</li>
                 <li class="sidebar-item {{ request()->routeIs('admin.user.*') ? 'active' : '' }}">
                     <a href="{{ route('admin.user.index') }}" class='sidebar-link'>

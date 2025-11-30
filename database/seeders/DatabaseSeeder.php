@@ -2,10 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,19 +11,27 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // Seeder User Admin Pertama
-        User::factory()->create([
-            'name' => 'Admin Pertama',
-            'email' => 'admin@example.com',
-            'password' => Hash::make('password123'),
+        // Urutan seeder sangat penting karena ada relasi foreign key
+        $this->call([
+            // 1. Seed User terlebih dahulu
+            UserSeeder::class,
+
+            // 2. Seed Warga (tidak ada relasi ke tabel lain)
+            WargaSeeder::class,
+
+            // 3. Seed JenisSurat (tidak ada relasi ke tabel lain)
+            JenisSuratSeeder::class,
+
+            // 4. Seed PermohonanSurat (butuh Warga & JenisSurat)
+            PermohonanSuratSeeder::class,
+
+            // 5. Seed BerkasPersyaratan (butuh PermohonanSurat)
+            BerkasPersyaratanSeeder::class,
+
+            // 5. Seed BerkasPersyaratan (butuh PermohonanSurat)
+            RiwayatStatusSuratSeeder::class,
         ]);
 
-        // Seeder Relasi Permohonan Surat dan Berkas Persyaratan
-        $this->call([
-            WargaSeeder::class,
-            JenisSuratSeeder::class,
-            PermohonanSuratSeeder::class,
-            BerkasPersyaratanSeeder::class,
-        ]);
+        $this->command->info('🎉 Semua seeder berhasil dijalankan!');
     }
 }

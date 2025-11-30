@@ -1,78 +1,80 @@
 @extends('layouts.admin.app')
 
-@section('title', 'Data Media')
+@section('title', 'Media - Bina Desa')
 
 @section('content')
 <div class="page-heading d-flex justify-content-between align-items-center">
-    <h3>Data Media</h3>
+    <h3>Media</h3>
     <a href="{{ route('admin.media.create') }}" class="btn btn-primary">
-        <i class="bi bi-plus-circle"></i> Upload Media
+        <i class="bi bi-plus-circle"></i> Tambah Media
     </a>
 </div>
 
-<section class="section">
-    @if(session('success'))
-        <div class="alert alert-success alert-dismissible fade show">
-            <i class="bi bi-check-circle"></i> {{ session('success') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        </div>
-    @endif
-
+<section class="section mt-4">
     <div class="card">
-        <div class="card-header"><h4>Daftar Media</h4></div>
+        <div class="card-header">
+            <h4>Daftar Media</h4>
+        </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-hover align-middle">
-                    <thead class="table-light">
+                <table class="table table-hover table-striped">
+                    <thead>
                         <tr>
+                            <th>No</th>
                             <th>Preview</th>
-                            <th>Ref Table</th>
-                            <th>Ref ID</th>
-                            <th>File Name</th>
+                            <th>Referensi</th>
                             <th>Caption</th>
-                            <th>Type</th>
-                            <th>Order</th>
+                            <th>Tipe</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse($media as $m)
-                            <tr>
-                                <td>
-                                    @if($m->is_image)
-                                        <img src="{{ $m->full_url }}" alt="{{ $m->caption }}" class="img-thumbnail" style="width:60px;height:60px;object-fit:cover;">
-                                    @else
-                                        <div class="text-center" style="font-size:2rem;">
-                                            <i class="bi {{ $m->file_icon }} text-primary"></i>
-                                        </div>
-                                    @endif
-                                </td>
-                                <td><span class="badge bg-info">{{ $m->ref_table }}</span></td>
-                                <td>{{ $m->ref_id }}</td>
-                                <td><small class="text-muted">{{ basename($m->file_url) }}</small></td>
-                                <td>{{ $m->caption ?? '-' }}</td>
-                                <td><code>{{ $m->mime_type }}</code></td>
-                                <td><span class="badge bg-secondary">{{ $m->sort_order }}</span></td>
-                                <td>
-                                    <a href="{{ route('admin.media.show', $m->media_id) }}" class="btn btn-sm btn-info">
-                                        <i class="bi bi-eye"></i>
-                                    </a>
-                                    <a href="{{ route('admin.media.edit', $m->media_id) }}" class="btn btn-sm btn-warning">
-                                        <i class="bi bi-pencil"></i>
-                                    </a>
-                                    <form action="{{ route('admin.media.destroy', $m->media_id) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin hapus media ini?')">
-                                        @csrf @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-danger">
-                                            <i class="bi bi-trash"></i>
-                                        </button>
-                                    </form>
-                                </td>
-                            </tr>
+                        @forelse($media as $index => $item)
+                        <tr>
+                            <td>{{ ($media->currentPage() - 1) * $media->perPage() + $index + 1 }}</td>
+                            <td>
+                                @if($item->isImage())
+                                    <img src="{{ asset('storage/' . $item->file_name) }}" alt="preview" style="width: 60px; height: 60px; object-fit: cover;" class="rounded">
+                                @elseif($item->isVideo())
+                                    <video width="60" height="60" class="rounded">
+                                        <source src="{{ asset('storage/' . $item->file_name) }}" type="{{ $item->mime_type }}">
+                                    </video>
+                                @else
+                                    <span class="badge bg-secondary">📄 File</span>
+                                @endif
+                            </td>
+                            <td>
+                                <small class="text-muted">{{ $item->ref_table }}</small><br>
+                                <span class="badge bg-info">ID: {{ $item->ref_id }}</span>
+                            </td>
+                            <td>{{ $item->caption ?? '-' }}</td>
+                            <td><small class="badge bg-light text-dark">{{ $item->mime_type }}</small></td>
+                            <td>
+                                <a href="{{ route('admin.media.show', $item->media_id) }}" class="btn btn-sm btn-info">
+                                    <i class="bi bi-eye"></i>
+                                </a>
+                                <a href="{{ route('admin.media.edit', $item->media_id) }}" class="btn btn-sm btn-warning">
+                                    <i class="bi bi-pencil"></i>
+                                </a>
+                                <form action="{{ route('admin.media.destroy', $item->media_id) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin hapus media ini?')">
+                                    @csrf @method('DELETE')
+                                    <button type="submit" class="btn btn-sm btn-danger">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
                         @empty
-                            <tr><td colspan="8" class="text-center text-muted">Belum ada data media</td></tr>
+                        <tr>
+                            <td colspan="6" class="text-center text-muted">Belum ada media</td>
+                        </tr>
                         @endforelse
                     </tbody>
                 </table>
+            </div>
+
+            <div class="mt-3">
+                {{ $media->links() }}
             </div>
         </div>
     </div>

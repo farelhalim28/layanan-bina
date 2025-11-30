@@ -1,96 +1,46 @@
 @extends('layouts.admin.app')
 
-@section('title', 'Detail Permohonan Surat')
-
 @section('content')
-<div class="page-heading">
-    <h3>Detail Permohonan Surat</h3>
-</div>
+<div class="container py-4">
+    <h4>Detail Permohonan Surat</h4>
 
-<section class="section">
-    <div class="card">
-        <div class="card-header"><h4>Informasi Permohonan Surat</h4></div>
+    <div class="card mt-3">
         <div class="card-body">
-            <table class="table table-bordered">
-                <tr>
-                    <th style="width: 30%">Nomor Permohonan</th>
-                    <td>{{ $permohonanSurat->nomor_permohonan }}</td>
-                </tr>
-                <tr>
-                    <th>Pemohon</th>
-                    <td>{{ $permohonanSurat->pemohon->nama ?? '-' }} (NIK: {{ $permohonanSurat->pemohon->nik ?? '-' }})</td>
-                </tr>
-                <tr>
-                    <th>Jenis Surat</th>
-                    <td>{{ $permohonanSurat->jenisSurat->nama_jenis ?? '-' }} ({{ $permohonanSurat->jenisSurat->kode ?? '-' }})</td>
-                </tr>
-                <tr>
-                    <th>Tanggal Pengajuan</th>
-                    <td>{{ $permohonanSurat->tanggal_pengajuan->format('d F Y') }}</td>
-                </tr>
-                <tr>
-                    <th>Status</th>
-                    <td>
-                        @if($permohonanSurat->status == 'pending')
-                            <span class="badge bg-warning">Pending</span>
-                        @elseif($permohonanSurat->status == 'diproses')
-                            <span class="badge bg-info">Diproses</span>
-                        @elseif($permohonanSurat->status == 'selesai')
-                            <span class="badge bg-success">Selesai</span>
-                        @else
-                            <span class="badge bg-danger">Ditolak</span>
-                        @endif
-                    </td>
-                </tr>
-                <tr>
-                    <th>Catatan</th>
-                    <td>{{ $permohonanSurat->catatan ?? '-' }}</td>
-                </tr>
-            </table>
-
-            <div class="mt-4">
-                <h5>Berkas Persyaratan</h5>
-                <div class="table-responsive">
-                    <table class="table table-bordered table-sm">
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Nama Berkas</th>
-                                <th>Status Validasi</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @forelse($permohonanSurat->berkasPersyaratan as $index => $berkas)
-                            <tr>
-                                <td>{{ $index + 1 }}</td>
-                                <td>{{ $berkas->nama_berkas }}</td>
-                                <td>
-                                    @if($berkas->valid)
-                                        <span class="badge bg-success">Valid</span>
-                                    @else
-                                        <span class="badge bg-danger">Tidak Valid</span>
-                                    @endif
-                                </td>
-                            </tr>
-                            @empty
-                            <tr>
-                                <td colspan="3" class="text-center text-muted">Belum ada berkas persyaratan</td>
-                            </tr>
-                            @endforelse
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <div class="d-flex justify-content-end gap-2 mt-3">
-                <a href="{{ route('admin.permohonan-surat.edit', $permohonanSurat->permohonan_id) }}" class="btn btn-warning">
-                    <i class="bi bi-pencil"></i> Edit
-                </a>
-                <a href="{{ route('admin.permohonan-surat.index') }}" class="btn btn-secondary">
-                    <i class="bi bi-arrow-left"></i> Kembali
-                </a>
-            </div>
+            <p><strong>Nomor Permohonan:</strong> {{ $permohonanSurat->nomor_permohonan }}</p>
+            <p><strong>Pemohon:</strong> {{ $permohonanSurat->pemohon->nama ?? '-' }}</p>
+            <p><strong>Jenis Surat:</strong> {{ $permohonanSurat->jenisSurat->nama_jenis ?? '-' }}</p>
+            <p><strong>Status:</strong> <span class="badge bg-info">{{ $permohonanSurat->status }}</span></p>
+            <p><strong>Tanggal Pengajuan:</strong> {{ $permohonanSurat->tanggal_pengajuan->format('d/m/Y') }}</p>
+            <p><strong>Catatan:</strong> {{ $permohonanSurat->catatan ?? '-' }}</p>
         </div>
     </div>
-</section>
+
+    <h5 class="mt-4">📎 Berkas Lampiran</h5>
+
+    <div class="row mt-2">
+        @forelse($mediaFiles as $file)
+            <div class="col-md-3 mb-3 text-center">
+
+                @if(Str::contains($file->mime_type, 'image'))
+                    <img src="{{ asset('storage/' . $file->file_name) }}" class="img-fluid rounded shadow">
+
+                @elseif(Str::contains($file->mime_type, 'video'))
+                    <video class="w-100 rounded shadow" controls>
+                        <source src="{{ asset('storage/' . $file->file_name) }}" type="{{ $file->mime_type }}">
+                    </video>
+
+                @else
+                    <a href="{{ asset('storage/' . $file->file_name) }}" class="btn btn-outline-primary w-100" download>
+                        📄 Download File
+                    </a>
+                @endif
+
+            </div>
+        @empty
+            <p class="text-muted">Belum ada file lampiran.</p>
+        @endforelse
+    </div>
+
+    <a href="{{ route('admin.permohonan-surat.index') }}" class="btn btn-secondary mt-4">⬅ Kembali</a>
+</div>
 @endsection

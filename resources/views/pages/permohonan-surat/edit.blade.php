@@ -1,87 +1,111 @@
 @extends('layouts.admin.app')
 
-@section('title', 'Edit Permohonan Surat')
-
 @section('content')
-<div class="page-heading">
-    <h3>Edit Permohonan Surat</h3>
-</div>
+<div class="container py-4">
+    <h4 class="mb-4">Edit Permohonan Surat</h4>
 
-<section class="section">
-    <div class="card">
-        <div class="card-header"><h4>Form Edit Permohonan Surat</h4></div>
-        <div class="card-body">
-            <form action="{{ route('admin.permohonan-surat.update', $permohonanSurat->permohonan_id) }}" method="POST">
-                @csrf @method('PUT')
-                <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <label for="nomor_permohonan" class="form-label">Nomor Permohonan</label>
-                        <input type="text" name="nomor_permohonan" id="nomor_permohonan" class="form-control @error('nomor_permohonan') is-invalid @enderror" value="{{ old('nomor_permohonan', $permohonanSurat->nomor_permohonan) }}" required>
-                        @error('nomor_permohonan')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label for="pemohon_warga_id" class="form-label">Pemohon</label>
-                        <select name="pemohon_warga_id" id="pemohon_warga_id" class="form-select @error('pemohon_warga_id') is-invalid @enderror" required>
-                            <option value="">Pilih Pemohon</option>
-                            @foreach($warga as $w)
-                                <option value="{{ $w->warga_id }}" {{ old('pemohon_warga_id', $permohonanSurat->pemohon_warga_id) == $w->warga_id ? 'selected' : '' }}>
-                                    {{ $w->nama }} - {{ $w->nik }}
-                                </option>
-                            @endforeach
-                        </select>
-                        @error('pemohon_warga_id')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label for="jenis_id" class="form-label">Jenis Surat</label>
-                        <select name="jenis_id" id="jenis_id" class="form-select @error('jenis_id') is-invalid @enderror" required>
-                            <option value="">Pilih Jenis Surat</option>
-                            @foreach($jenis_surat as $jenis)
-                                <option value="{{ $jenis->jenis_id }}" {{ old('jenis_id', $permohonanSurat->jenis_id) == $jenis->jenis_id ? 'selected' : '' }}>
-                                    {{ $jenis->kode }} - {{ $jenis->nama_jenis }}
-                                </option>
-                            @endforeach
-                        </select>
-                        @error('jenis_id')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label for="tanggal_pengajuan" class="form-label">Tanggal Pengajuan</label>
-                        <input type="date" name="tanggal_pengajuan" id="tanggal_pengajuan" class="form-control @error('tanggal_pengajuan') is-invalid @enderror" value="{{ old('tanggal_pengajuan', $permohonanSurat->tanggal_pengajuan->format('Y-m-d')) }}" required>
-                        @error('tanggal_pengajuan')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
-                    <div class="col-md-12 mb-3">
-                        <label for="status" class="form-label">Status</label>
-                        <select name="status" id="status" class="form-select @error('status') is-invalid @enderror" required>
-                            <option value="pending" {{ old('status', $permohonanSurat->status) == 'pending' ? 'selected' : '' }}>Pending</option>
-                            <option value="diproses" {{ old('status', $permohonanSurat->status) == 'diproses' ? 'selected' : '' }}>Diproses</option>
-                            <option value="selesai" {{ old('status', $permohonanSurat->status) == 'selesai' ? 'selected' : '' }}>Selesai</option>
-                            <option value="ditolak" {{ old('status', $permohonanSurat->status) == 'ditolak' ? 'selected' : '' }}>Ditolak</option>
-                        </select>
-                        @error('status')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
-                    <div class="col-md-12 mb-3">
-                        <label for="catatan" class="form-label">Catatan</label>
-                        <textarea name="catatan" id="catatan" rows="4" class="form-control @error('catatan') is-invalid @enderror">{{ old('catatan', $permohonanSurat->catatan) }}</textarea>
-                        @error('catatan')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
-                </div>
-                <div class="d-flex justify-content-end gap-2">
-                    <a href="{{ route('admin.permohonan-surat.index') }}" class="btn btn-secondary">Batal</a>
-                    <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
-                </div>
-            </form>
+    <form action="{{ route('admin.permohonan-surat.update', $permohonanSurat->permohonan_id) }}" method="POST" enctype="multipart/form-data">
+        @csrf
+        @method('PUT')
+
+        <div class="row g-3">
+
+            <div class="col-md-6">
+                <label class="form-label">Nomor Permohonan</label>
+                <input type="text" name="nomor_permohonan" class="form-control" value="{{ $permohonanSurat->nomor_permohonan }}" required>
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label">Pemohon</label>
+                <select name="pemohon_warga_id" class="form-control" required>
+                    <option value="">-- Pilih Pemohon --</option>
+                    @foreach($warga as $item)
+                        <option value="{{ $item->warga_id }}"
+                            {{ $item->warga_id == $permohonanSurat->pemohon_warga_id ? 'selected' : '' }}>
+                            {{ $item->nama }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label">Jenis Surat</label>
+                <select name="jenis_id" class="form-control" required>
+                    <option value="">-- Pilih Jenis Surat --</option>
+                    @foreach($jenis_surat as $item)
+                        <option value="{{ $item->jenis_id }}"
+                            {{ $item->jenis_id == $permohonanSurat->jenis_id ? 'selected' : '' }}>
+                            {{ $item->nama_jenis }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label">Tanggal Pengajuan</label>
+                <input type="date" name="tanggal_pengajuan" class="form-control" value="{{ $permohonanSurat->tanggal_pengajuan->format('Y-m-d') }}" required>
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label">Status</label>
+                <select name="status" class="form-control" required>
+                    <option value="pending" {{ $permohonanSurat->status=='pending'?'selected':'' }}>Pending</option>
+                    <option value="diproses" {{ $permohonanSurat->status=='diproses'?'selected':'' }}>Diproses</option>
+                    <option value="selesai" {{ $permohonanSurat->status=='selesai'?'selected':'' }}>Selesai</option>
+                    <option value="ditolak" {{ $permohonanSurat->status=='ditolak'?'selected':'' }}>Ditolak</option>
+                </select>
+            </div>
+
+            <div class="col-md-12">
+                <label class="form-label">Catatan</label>
+                <textarea name="catatan" class="form-control" rows="3">{{ $permohonanSurat->catatan }}</textarea>
+            </div>
+
+            <div class="col-md-12">
+                <label class="form-label">Upload Berkas Baru</label>
+                <input type="file" name="files[]" class="form-control" multiple>
+                <small class="text-muted">Bisa upload banyak file (PDF, Gambar, Video, ZIP)</small>
+            </div>
+
         </div>
-    </div>
-</section>
+
+        <hr class="my-4">
+
+        <h5>📁 Berkas Yang Sudah Diupload</h5>
+
+        <div class="row mt-3">
+            @forelse($mediaFiles as $file)
+                <div class="col-md-3 mb-3 text-center">
+
+                    @if(Str::contains($file->mime_type, 'image'))
+                        <img src="{{ asset('storage/' . $file->file_name) }}" class="img-fluid rounded shadow">
+
+                    @elseif(Str::contains($file->mime_type, 'video'))
+                        <video class="w-100 rounded shadow" controls>
+                            <source src="{{ asset('storage/' . $file->file_name) }}" type="{{ $file->mime_type }}">
+                        </video>
+
+                    @else
+                        <a href="{{ asset('storage/' . $file->file_name) }}" class="btn btn-outline-primary w-100" download>
+                            📄 Download File
+                        </a>
+                    @endif
+
+                    <form action="{{ route('admin.permohonan-surat.media.delete', $file->media_id) }}" method="POST" class="mt-2">
+                        @csrf
+                        @method('DELETE')
+                        <button class="btn btn-danger btn-sm w-100">Hapus</button>
+                    </form>
+
+                </div>
+            @empty
+                <p class="text-muted">Belum ada file</p>
+            @endforelse
+        </div>
+
+        <button class="btn btn-primary mt-4">💾 Simpan Perubahan</button>
+        <a href="{{ route('admin.permohonan-surat.index') }}" class="btn btn-secondary mt-4">Kembali</a>
+
+    </form>
+</div>
 @endsection

@@ -1,74 +1,82 @@
-    <?php
+  <?php
 
-    use Illuminate\Support\Facades\Route;
-    use App\Http\Controllers\AuthController;
-    use App\Http\Controllers\DashboardController;
-    use App\Http\Controllers\WargaController;
-    use App\Http\Controllers\JenisSuratController;
-    use App\Http\Controllers\UserController;
-    use App\Http\Controllers\MediaController;
-    use App\Http\Controllers\PermohonanSuratController;
-    use App\Http\Controllers\BerkasPersyaratanController;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\WargaController;
+use App\Http\Controllers\JenisSuratController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\MediaController;
+use App\Http\Controllers\PermohonanSuratController;
+use App\Http\Controllers\BerkasPersyaratanController;
+use App\Http\Controllers\RiwayatStatusSuratController;
+use App\Http\Controllers\MultipleUploadController;
 
-    /*
-    |--------------------------------------------------------------------------
-    | Web Routes - Proyek Bina Desa
-    |--------------------------------------------------------------------------
-    */
+/*
+|--------------------------------------------------------------------------
+| Web Routes - Proyek Bina Desa
+|--------------------------------------------------------------------------
+*/
 
-    // =====================
-    // DEFAULT REDIRECT
-    // =====================
-    Route::get('/', function () {
-        return session('user')
-            ? redirect()->route('admin.dashboard')
-            : redirect()->route('admin.login');
-    });
+// =====================
+// DEFAULT REDIRECT
+// =====================
+Route::get('/', function () {
+    return session('user')
+        ? redirect()->route('admin.dashboard')
+        : redirect()->route('admin.login');
+});
 
-    // =====================
-    // AUTH ROUTES
-    // =====================
-    Route::get('/admin/login', [AuthController::class, 'showLoginForm'])->name('admin.login');
-    Route::post('/admin/login', [AuthController::class, 'login'])->name('admin.login.post');
-    Route::get('/admin/register', [AuthController::class, 'showRegisterForm'])->name('admin.register');
-    Route::post('/admin/register', [AuthController::class, 'register'])->name('admin.register.post');
+// =====================
+// AUTH ROUTES
+// =====================
+Route::get('/admin/login', [AuthController::class, 'showLoginForm'])->name('admin.login');
+Route::post('/admin/login', [AuthController::class, 'login'])->name('admin.login.post');
+Route::get('/admin/register', [AuthController::class, 'showRegisterForm'])->name('admin.register');
+Route::post('/admin/register', [AuthController::class, 'register'])->name('admin.register.post');
 
-    // =====================
-    // admin AREA (Protected)
-    // =====================
-    Route::prefix('admin')->name('admin.')->group(function () {
-        Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
-        Route::resource('warga', WargaController::class);
-        Route::resource('jenis-surat', JenisSuratController::class);
-        Route::resource('user', UserController::class);
-        Route::resource('media', MediaController::class);
-        Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-    });
+// =====================
+// ADMIN AREA (Protected)
+// =====================
+Route::prefix('admin')->name('admin.')->group(function () {
 
+    // Dashboard
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-    // Tambahkan routes ini di dalam Route::group untuk admin
+    // Logout
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-    // Routes untuk Permohonan Surat
-    Route::resource('permohonan-surat', PermohonanSuratController::class)->names([
-        'index' => 'admin.permohonan-surat.index',
-        'create' => 'admin.permohonan-surat.create',
-        'store' => 'admin.permohonan-surat.store',
-        'show' => 'admin.permohonan-surat.show',
-        'edit' => 'admin.permohonan-surat.edit',
-        'update' => 'admin.permohonan-surat.update',
-        'destroy' => 'admin.permohonan-surat.destroy',
-    ]);
+    // ===== MASTER DATA =====
+    Route::resource('warga', WargaController::class);
+    Route::resource('user', UserController::class);
 
-    // Routes untuk Berkas Persyaratan
-    Route::resource('berkas-persyaratan', BerkasPersyaratanController::class)->names([
-        'index' => 'admin.berkas-persyaratan.index',
-        'create' => 'admin.berkas-persyaratan.create',
-        'store' => 'admin.berkas-persyaratan.store',
-        'show' => 'admin.berkas-persyaratan.show',
-        'edit' => 'admin.berkas-persyaratan.edit',
-        'update' => 'admin.berkas-persyaratan.update',
-        'destroy' => 'admin.berkas-persyaratan.destroy',
-    ]);
+    // ===== JENIS SURAT =====
+    Route::resource('jenis-surat', JenisSuratController::class);
+    // Route khusus delete media jenis surat
+    Route::delete('jenis-surat/media/{id}', [JenisSuratController::class, 'deleteMedia'])->name('jenis-surat.media.delete');
+
+    // ===== PERMOHONAN SURAT =====
+    Route::resource('permohonan-surat', PermohonanSuratController::class);
+    // Route khusus delete media permohonan surat
+    Route::delete('permohonan-surat/media/{id}', [PermohonanSuratController::class, 'deleteMedia'])->name('permohonan-surat.media.delete');
+
+    // ===== BERKAS PERSYARATAN =====
+    Route::resource('berkas-persyaratan', BerkasPersyaratanController::class);
+    // Route khusus delete media berkas persyaratan
+    Route::delete('berkas-persyaratan/media/{id}', [BerkasPersyaratanController::class, 'deleteMedia'])->name('berkas-persyaratan.media.delete');
+
+    // ===== RIWAYAT STATUS SURAT =====
+    Route::resource('riwayat-status', RiwayatStatusSuratController::class);
+    Route::delete('riwayat-status/media/{id}', [App\Http\Controllers\RiwayatStatusSuratController::class, 'deleteMedia'])->name('riwayat-status.media.delete');
+
+    // ===== MEDIA (CRUD Standalone) =====
+    Route::resource('media', MediaController::class);
+
+    // ===== MULTIPLE UPLOAD (Helper) =====
+    Route::post('multipleupload', [MultipleUploadController::class, 'store'])->name('multipleupload.store');
+    Route::delete('multipleupload/{id}', [MultipleUploadController::class, 'destroy'])->name('multipleupload.destroy');
+
+});
 
 
     // use Illuminate\Support\Facades\Route;
