@@ -30,6 +30,16 @@
                 </div>
 
                 <div class="mb-3">
+                    <label for="role" class="form-label">Role <span class="text-danger">*</span></label>
+                    <select name="role" id="role" class="form-control @error('role') is-invalid @enderror" required>
+                        <option value="Super Admin" {{ $user->role == 'Super Admin' ? 'selected' : '' }}>Super Admin</option>
+                        <option value="Admin" {{ $user->role == 'Admin' ? 'selected' : '' }}>Admin</option>
+                        <option value="User" {{ $user->role == 'User' ? 'selected' : '' }}>User</option>
+                    </select>
+                    @error('role') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                </div>
+
+                <div class="mb-3">
                     <label for="password" class="form-label">Password Baru</label>
                     <input type="password" id="password" name="password" class="form-control @error('password') is-invalid @enderror">
                     <small class="text-muted">Kosongkan jika tidak ingin mengubah password</small>

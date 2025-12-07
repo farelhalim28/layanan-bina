@@ -18,6 +18,7 @@
                 <img src="https://ui-avatars.com/api/?name={{ urlencode($user->name) }}&size=150&background=random"
                      alt="{{ $user->name }}" class="rounded-circle mb-3" style="width: 150px; height: 150px;">
                 <h4>{{ $user->name }}</h4>
+                <span class="badge bg-primary">{{ $user->role }}</span>
             </div>
 
             <div class="row">
@@ -26,6 +27,7 @@
                         <tr><th>ID User</th><td>: {{ $user->id }}</td></tr>
                         <tr><th>Nama Lengkap</th><td>: {{ $user->name }}</td></tr>
                         <tr><th>Email</th><td>: {{ $user->email }}</td></tr>
+                        <tr><th>Role</th><td>: {{ $user->role }}</td></tr>
                     </table>
                 </div>
                 <div class="col-md-6">

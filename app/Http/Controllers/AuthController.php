@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth; // TAMBAHKAN INI
 use App\Models\User;
 
 class AuthController extends Controller
@@ -13,7 +14,8 @@ class AuthController extends Controller
      */
     public function showLoginForm()
     {
-        if (session('user')) {
+        // Ganti dari session('user') jadi Auth::check()
+        if (Auth::check()) {
             return redirect()->route('admin.dashboard');
         }
         return view('pages.auth.login');
@@ -39,12 +41,8 @@ class AuthController extends Controller
             return back()->withErrors(['password' => 'Password salah'])->withInput();
         }
 
-        // Simpan session user
-        session(['user' => [
-            'id' => $user->id,
-            'name' => $user->name,
-            'email' => $user->email,
-        ]]);
+        // GANTI: Pakai Auth::login() bukan session manual
+        Auth::login($user);
 
         return redirect()->route('admin.dashboard')->with('success', 'Login berhasil!');
     }
@@ -54,7 +52,7 @@ class AuthController extends Controller
      */
     public function showRegisterForm()
     {
-        if (session('user')) {
+        if (Auth::check()) {
             return redirect()->route('admin.dashboard');
         }
         return view('pages.auth.register');
@@ -69,12 +67,14 @@ class AuthController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:6|confirmed',
+            'role' => 'nullable|string', // TAMBAHKAN INI (optional)
         ]);
 
         User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'role' => $request->role ?? 'User', // Default role
         ]);
 
         return redirect()->route('admin.login')->with('success', 'Registrasi berhasil! Silakan login.');
@@ -83,9 +83,13 @@ class AuthController extends Controller
     /**
      * Logout
      */
-    public function logout()
+    public function logout(Request $request)
     {
-        session()->forget('user');
+        // GANTI: Pakai Auth::logout()
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
         return redirect()->route('admin.login')->with('success', 'Logout berhasil!');
     }
 }

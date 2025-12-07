@@ -11,11 +11,18 @@ use App\Models\BerkasPersyaratan;
 use App\Models\RiwayatStatusSurat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth; // <--- FIX ERROR DISINI
 
 class DashboardController extends Controller
 {
     public function index()
     {
+        // Cek Login (opsional karena sudah ada middleware)
+        if (!Auth::check()) {
+            return redirect()->route('admin.login')
+                ->withErrors('Silahkan login terlebih dahulu!');
+        }
+
         // Statistik Utama
         $stats = [
             'total_warga' => Warga::count(),
@@ -34,25 +41,25 @@ class DashboardController extends Controller
             'pending_request' => PermohonanSurat::where('status', 'pending')->count(),
         ];
 
-        // Data Warga Terbaru (5 terbaru)
+        // Data Warga Terbaru
         $warga = Warga::latest()->take(5)->get();
 
         // Data Jenis Surat
         $jenis_surat = JenisSurat::latest()->take(5)->get();
 
-        // Permohonan Surat Terbaru (5 terbaru)
+        // Permohonan Surat Terbaru
         $permohonan_terbaru = PermohonanSurat::with(['pemohon', 'jenisSurat'])
             ->latest()
             ->take(5)
             ->get();
 
-        // Media Terbaru (5 terbaru)
+        // Media Terbaru
         $media_terbaru = Media::latest()->take(6)->get();
 
-        // Data untuk Chart - Aktivitas Permohonan per Bulan (2025)
+        // Grafik
         $chartData = $this->getMonthlyActivity();
 
-        // Status Distribution (untuk Donut Chart)
+        // Distribution untuk Donut Chart
         $statusDistribution = [
             'pending' => $stats['surat_pending'],
             'diproses' => $stats['surat_diproses'],
@@ -72,7 +79,7 @@ class DashboardController extends Controller
     }
 
     /**
-     * Get monthly activity data for chart
+     * Grafik Permohonan Per Bulan
      */
     private function getMonthlyActivity()
     {
@@ -85,7 +92,7 @@ class DashboardController extends Controller
             ->pluck('total', 'month')
             ->toArray();
 
-        // Fill missing months with 0
+        // Isi bulan kosong dengan 0
         $data = [];
         for ($i = 1; $i <= 12; $i++) {
             $data[] = $monthlyData[$i] ?? 0;

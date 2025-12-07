@@ -30,9 +30,20 @@
                 </div>
 
                 <div class="mb-3">
+                    <label for="role" class="form-label">Role <span class="text-danger">*</span></label>
+                    <select name="role" id="role" class="form-control @error('role') is-invalid @enderror" required>
+                        <option value="" disabled selected>Pilih Role</option>
+                        <option value="Super Admin" {{ old('role') == 'Super Admin' ? 'selected' : '' }}>Super Admin</option>
+                        <option value="Admin" {{ old('role') == 'Admin' ? 'selected' : '' }}>Admin</option>
+                        <option value="User" {{ old('role') == 'User' ? 'selected' : '' }}>User</option>
+                    </select>
+                    @error('role') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                </div>
+
+                <div class="mb-3">
                     <label for="password" class="form-label">Password <span class="text-danger">*</span></label>
                     <input type="password" id="password" name="password" class="form-control @error('password') is-invalid @enderror" required>
-                    <small class="text-muted">Minimal 6 karakter</small>
+                    <small class="text-muted">Minimal 8 karakter</small>
                     @error('password') <div class="invalid-feedback">{{ $message }}</div> @enderror
                 </div>
 

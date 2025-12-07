@@ -28,6 +28,11 @@ class UserController extends Controller
             }
         }
 
+        // TAMBAHAN: Filter berdasarkan role
+        if ($request->filled('role')) {
+            $query->where('role', $request->role);
+        }
+
         // Search
         $users = $query->search($request, $searchableColumns)
                        ->latest()
@@ -54,12 +59,14 @@ class UserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:8|confirmed',
+            'role' => 'required|in:Super Admin,Admin,User', // TAMBAHAN
         ], [
             'name.required' => 'Nama wajib diisi',
             'email.required' => 'Email wajib diisi',
             'email.unique' => 'Email sudah terdaftar',
             'password.required' => 'Password wajib diisi',
             'password.confirmed' => 'Konfirmasi password tidak cocok',
+            'role.required' => 'Role wajib dipilih', // TAMBAHAN
         ]);
 
         $validated['password'] = Hash::make($validated['password']);
@@ -99,6 +106,7 @@ class UserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email,' . $id,
             'password' => 'nullable|min:8|confirmed',
+            'role' => 'required|in:Super Admin,Admin,User', // TAMBAHAN
         ]);
 
         if (!empty($validated['password'])) {
