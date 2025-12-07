@@ -89,7 +89,7 @@
                         </a>
                     @endif
 
-                    <form action="{{ route('admin.media.delete', $file->media_id) }}" method="POST">
+                    <form action="{{ route('admin.media.destroy', $file->media_id) }}" method="POST">
                         @csrf @method('DELETE')
                         <button class="btn btn-danger btn-sm mt-2 w-100">Hapus</button>
                     </form>
