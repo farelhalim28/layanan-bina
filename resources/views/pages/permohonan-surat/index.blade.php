@@ -3,6 +3,7 @@
 @section('title', 'Permohonan Surat - Bina Desa')
 
 @section('content')
+
 <style>
     .page-wrapper {
         background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
@@ -45,6 +46,7 @@
         font-weight: 600;
         transition: all 0.3s;
         box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+        text-decoration: none;
     }
 
     .btn-add-floating:hover {
@@ -114,63 +116,96 @@
         color: white;
     }
 
-    /* CARD GRID LAYOUT */
-    .cards-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-        gap: 25px;
-        margin-top: 20px;
-    }
-
-    .permohonan-card {
+    /* MODERN TABLE STYLING */
+    .table-container {
         background: white;
         border-radius: 20px;
-        padding: 25px;
-        transition: all 0.3s;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-        position: relative;
+        padding: 0;
+        box-shadow: 0 8px 30px rgba(0,0,0,0.08);
         overflow: hidden;
     }
 
-    .permohonan-card::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 4px;
+    .modern-table {
+        margin: 0;
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+    }
+
+    .modern-table thead {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     }
 
-    .permohonan-card:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+    .modern-table thead th {
+        padding: 20px 18px;
+        font-weight: 700;
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: white;
+        border: none;
+        white-space: nowrap;
     }
 
-    .card-header-custom {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-        margin-bottom: 20px;
+    .modern-table tbody tr {
+        transition: all 0.3s;
+        border-bottom: 1px solid #f1f5f9;
     }
 
-    .badge-nomor {
+    .modern-table tbody tr:hover {
+        background: linear-gradient(90deg, #f8fafc 0%, #f1f5f9 100%);
+        transform: scale(1.01);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+
+    .modern-table tbody td {
+        padding: 18px;
+        vertical-align: middle;
+        font-size: 13px;
+        color: #1e293b;
+        border: none;
+    }
+
+    .nomor-badge {
+        display: inline-block;
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         color: white;
-        padding: 10px 20px;
-        border-radius: 12px;
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-size: 12px;
         font-weight: 700;
-        font-size: 14px;
-        display: inline-block;
+        white-space: nowrap;
         box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
     }
 
-    .badge-status {
-        padding: 8px 16px;
-        border-radius: 12px;
+    .pemohon-info {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .pemohon-info strong {
+        font-weight: 700;
+        color: #1e293b;
+        font-size: 14px;
+        margin-bottom: 3px;
+    }
+
+    .pemohon-info small {
+        color: #94a3b8;
+        font-size: 11px;
         font-weight: 600;
-        font-size: 12px;
-        display: inline-block;
+    }
+
+    .status-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 8px 14px;
+        border-radius: 20px;
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        white-space: nowrap;
     }
 
     .status-diajukan {
@@ -193,56 +228,34 @@
         color: #dc2626;
     }
 
-    .card-icon {
-        width: 50px;
-        height: 50px;
+    .jenis-surat-badge {
+        display: inline-block;
         background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-        border-radius: 12px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 24px;
         color: white;
-    }
-
-    .card-info {
-        margin-bottom: 15px;
-    }
-
-    .info-label {
+        padding: 6px 12px;
+        border-radius: 20px;
         font-size: 11px;
         font-weight: 700;
-        color: #94a3b8;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
     }
 
-    .info-value {
-        font-size: 15px;
-        font-weight: 600;
-        color: #1e293b;
-        margin-top: 4px;
-    }
-
-    .card-actions {
+    .action-buttons {
         display: flex;
         gap: 8px;
-        padding-top: 20px;
-        border-top: 2px solid #f1f5f9;
+        justify-content: flex-end;
     }
 
-    .btn-action-card {
-        flex: 1;
-        padding: 10px;
+    .btn-action {
+        padding: 8px 14px;
         border-radius: 10px;
         border: none;
         font-weight: 600;
-        font-size: 13px;
+        font-size: 12px;
         transition: all 0.3s;
-        display: flex;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-flex;
         align-items: center;
-        justify-content: center;
-        gap: 6px;
+        gap: 5px;
     }
 
     .btn-view {
@@ -279,12 +292,8 @@
     }
 
     .empty-state {
-        grid-column: 1 / -1;
         text-align: center;
         padding: 80px 20px;
-        background: white;
-        border-radius: 20px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
     }
 
     .empty-state i {
@@ -311,16 +320,51 @@
         box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
     }
 
+    /* Responsive */
     @media (max-width: 768px) {
-        .cards-grid {
-            grid-template-columns: 1fr;
-        }
-
         .modern-header {
             flex-direction: column;
             gap: 20px;
             text-align: center;
         }
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        .modern-table {
+            min-width: 1100px;
+        }
+
+        .action-buttons {
+            flex-direction: column;
+        }
+    }
+
+    /* Pagination styling */
+    .pagination {
+        margin-top: 25px;
+        justify-content: center;
+    }
+
+    .page-link {
+        border: 2px solid #e2e8f0;
+        color: #667eea;
+        margin: 0 4px;
+        border-radius: 10px;
+        font-weight: 600;
+        transition: all 0.3s;
+    }
+
+    .page-link:hover {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border-color: #667eea;
+    }
+
+    .page-item.active .page-link {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-color: #667eea;
     }
 </style>
 
@@ -391,58 +435,95 @@
             </form>
         </div>
 
-        {{-- Cards Grid --}}
-        <div class="cards-grid">
-            @forelse($permohonan_surat as $permohonan)
-                <div class="permohonan-card">
-                    <div class="card-header-custom">
-                        <span class="badge-nomor">{{ $permohonan->nomor_permohonan }}</span>
-                        <div class="card-icon">
-                            <i class="bi bi-file-earmark-arrow-up-fill"></i>
-                        </div>
-                    </div>
-
-                    <div style="margin-bottom: 15px;">
-                        <span class="badge-status status-{{ $permohonan->status }}">
-                            {{ ucfirst($permohonan->status) }}
-                        </span>
-                    </div>
-
-                    <div class="card-info">
-                        <div class="info-label">Nama Pemohon</div>
-                        <div class="info-value">{{ $permohonan->nama_pemohon }}</div>
-                    </div>
-
-                    <div class="card-info">
-                        <div class="info-label">Jenis Surat</div>
-                        <div class="info-value">{{ $permohonan->jenisSurat->nama_jenis ?? 'N/A' }}</div>
-                    </div>
-
-                    <div class="card-info">
-                        <div class="info-label">Tanggal Permohonan</div>
-                        <div class="info-value">{{ $permohonan->created_at->format('d M Y') }}</div>
-                    </div>
-
-                    <div class="card-actions">
-                        <a href="{{ route('admin.permohonan-surat.show', $permohonan->permohonan_id) }}"
-                           class="btn-action-card btn-view">
-                            <i class="bi bi-eye-fill"></i> Detail
-                        </a>
-                        <a href="{{ route('admin.permohonan-surat.edit', $permohonan->permohonan_id) }}"
-                           class="btn-action-card btn-edit">
-                            <i class="bi bi-pencil-fill"></i> Edit
-                        </a>
-                        <form action="{{ route('admin.permohonan-surat.destroy', $permohonan->permohonan_id) }}"
-                              method="POST" class="d-inline" style="flex: 1;"
-                              onsubmit="return confirm('Yakin hapus permohonan ini?')">
-                            @csrf @method('DELETE')
-                            <button type="submit" class="btn-action-card btn-delete w-100">
-                                <i class="bi bi-trash-fill"></i> Hapus
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            @empty
+        {{-- Modern Table --}}
+        <div class="table-container">
+            @if($permohonan_surat->count() > 0)
+                <table class="modern-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 50px;">#</th>
+                            <th style="width: 180px;">Nomor Permohonan</th>
+                            <th style="width: 200px;">Nama Pemohon</th>
+                            <th style="width: 180px;">Jenis Surat</th>
+                            <th style="width: 140px;">Status</th>
+                            <th style="width: 140px;">Tanggal Ajuan</th>
+                            <th style="width: 140px;">Tanggal Proses</th>
+                            <th style="width: 200px; text-align: center;">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($permohonan_surat as $index => $permohonan)
+                            <tr>
+                                <td>
+                                    <strong style="color: #667eea;">{{ $permohonan_surat->firstItem() + $index }}</strong>
+                                </td>
+                                <td>
+                                    <span class="nomor-badge">
+                                        <i class="bi bi-file-earmark-text"></i> {{ $permohonan->nomor_permohonan }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <div class="pemohon-info">
+                                        <strong>{{ $permohonan->nama_pemohon }}</strong>
+                                        <small>{{ $permohonan->email_pemohon ?? '-' }}</small>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="jenis-surat-badge">
+                                        {{ $permohonan->jenisSurat->nama_jenis ?? 'N/A' }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="status-badge status-{{ $permohonan->status }}">
+                                        @if($permohonan->status == 'diajukan')
+                                            <i class="bi bi-clock-fill"></i>
+                                        @elseif($permohonan->status == 'diproses')
+                                            <i class="bi bi-gear-fill"></i>
+                                        @elseif($permohonan->status == 'selesai')
+                                            <i class="bi bi-check-circle-fill"></i>
+                                        @elseif($permohonan->status == 'ditolak')
+                                            <i class="bi bi-x-circle-fill"></i>
+                                        @endif
+                                        {{ ucfirst($permohonan->status) }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <span style="color: #64748b; font-weight: 600;">
+                                        {{ $permohonan->created_at->format('d M Y') }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <span style="color: #64748b; font-weight: 600;">
+                                        {{ $permohonan->tanggal_proses ? \Carbon\Carbon::parse($permohonan->tanggal_proses)->format('d M Y') : '-' }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <a href="{{ route('admin.permohonan-surat.show', $permohonan->permohonan_id) }}"
+                                           class="btn-action btn-view"
+                                           title="Detail">
+                                            <i class="bi bi-eye-fill"></i>
+                                        </a>
+                                        <a href="{{ route('admin.permohonan-surat.edit', $permohonan->permohonan_id) }}"
+                                           class="btn-action btn-edit"
+                                           title="Edit">
+                                            <i class="bi bi-pencil-fill"></i>
+                                        </a>
+                                        <form action="{{ route('admin.permohonan-surat.destroy', $permohonan->permohonan_id) }}"
+                                              method="POST" class="d-inline"
+                                              onsubmit="return confirm('Yakin hapus permohonan ini?')">
+                                            @csrf @method('DELETE')
+                                            <button type="submit" class="btn-action btn-delete" title="Hapus">
+                                                <i class="bi bi-trash-fill"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            @else
                 <div class="empty-state">
                     <i class="bi bi-inbox"></i>
                     <h4>
@@ -453,7 +534,7 @@
                         @endif
                     </h4>
                 </div>
-            @endforelse
+            @endif
         </div>
 
         {{-- Pagination --}}

@@ -28,9 +28,15 @@
 
     /* Header Logo */
     .sidebar-header {
-        padding: 24px 20px;
+        padding: 20px;
         border-bottom: 2px solid #f1f5f9;
         background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+    }
+
+    .logo {
+        display: flex;
+        align-items: center;
+        gap: 12px;
     }
 
     .logo a {
@@ -38,6 +44,24 @@
         display: flex;
         align-items: center;
         gap: 12px;
+        width: 100%;
+    }
+
+    .logo-img {
+        width: 50px;
+        height: 50px;
+        object-fit: contain;
+        border-radius: 12px;
+        padding: 8px;
+        background: white;
+        flex-shrink: 0;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        border: 2px solid #e2e8f0;
+    }
+
+    .logo-text {
+        display: flex;
+        flex-direction: column;
     }
 
     .logo h4 {
@@ -48,10 +72,16 @@
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         letter-spacing: -0.5px;
+        line-height: 1.2;
     }
 
-    .logo i {
-        font-size: 28px;
+    .logo p {
+        margin: 4px 0 0 0;
+        font-size: 11px;
+        color: #94a3b8;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
     }
 
     /* Sidebar Menu */
@@ -303,7 +333,11 @@
         <div class="sidebar-header">
             <div class="logo">
                 <a href="{{ route('admin.dashboard') }}">
-                    <h4>🏘️ Bina Desa</h4>
+                    <img src="{{ asset('assets-admin/images/logo/unnamed.png') }}" alt="Logo Bina Desa" class="logo-img">
+                    <div class="logo-text">
+                        <h4>Bina Desa</h4>
+                        <p>Layanan Mandiri</p>
+                    </div>
                 </a>
             </div>
         </div>

@@ -441,12 +441,12 @@
                             <ul class="dropdown-menu dropdown-menu-end">
                                 <li>
                                     <a class="dropdown-item" href="{{ route('admin.berkas-persyaratan.show', $berkas->berkas_id) }}">
-                                        <i class="bi bi-eye"></i> Detail
+                                        <i class="bi bi-eye"></i>
                                     </a>
                                 </li>
                                 <li>
                                     <a class="dropdown-item" href="{{ route('admin.berkas-persyaratan.edit', $berkas->berkas_id) }}">
-                                        <i class="bi bi-pencil"></i> Edit
+                                        <i class="bi bi-pencil"></i>
                                     </a>
                                 </li>
                                 <li><hr class="dropdown-divider"></li>
@@ -455,7 +455,7 @@
                                         onsubmit="return confirm('Yakin ingin menghapus berkas ini?')">
                                         @csrf @method('DELETE')
                                         <button type="submit" class="dropdown-item text-danger">
-                                            <i class="bi bi-trash"></i> Hapus
+                                            <i class="bi bi-trash"></i>
                                         </button>
                                     </form>
                                 </li>

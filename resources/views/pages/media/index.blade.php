@@ -504,11 +504,11 @@
                         <div class="media-actions">
                             <a href="{{ route('admin.media.show', $item->media_id) }}"
                                class="btn-action-card btn-view">
-                                <i class="bi bi-eye-fill"></i> Detail
+                                <i class="bi bi-eye-fill"></i>
                             </a>
                             <a href="{{ route('admin.media.edit', $item->media_id) }}"
                                class="btn-action-card btn-edit">
-                                <i class="bi bi-pencil-fill"></i> Edit
+                                <i class="bi bi-pencil-fill"></i>
                             </a>
                             <form action="{{ route('admin.media.destroy', $item->media_id) }}"
                                   method="POST"
@@ -517,7 +517,7 @@
                                   onsubmit="return confirm('Yakin hapus media ini?')">
                                 @csrf @method('DELETE')
                                 <button type="submit" class="btn-action-card btn-delete w-100">
-                                    <i class="bi bi-trash-fill"></i> Hapus
+                                    <i class="bi bi-trash-fill"></i>
                                 </button>
                             </form>
                         </div>

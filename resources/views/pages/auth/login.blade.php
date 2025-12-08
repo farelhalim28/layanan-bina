@@ -179,9 +179,26 @@
 
         .card-header-auth {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 35px 35px;
+            padding: 35px 35px 25px 35px;
             text-align: center;
             color: white;
+        }
+
+        /* Logo Container */
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .logo-img {
+            width: 120px;
+            height: 120px;
+            object-fit: contain;
+            background: white;
+            padding: 8px;
+            border-radius: 50%;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
         }
 
         .card-header-auth h4 {
@@ -363,7 +380,12 @@
             }
 
             .card-header-auth {
-                padding: 25px;
+                padding: 25px 25px 20px 25px;
+            }
+
+            .logo-img {
+                width: 70px;
+                height: 70px;
             }
 
             .info-image-container {
@@ -442,6 +464,11 @@
             <div class="form-section">
                 <div class="card-auth">
                     <div class="card-header-auth">
+                        {{-- Logo --}}
+                        <div class="logo-container">
+                            <img src="{{ asset('assets-admin/images/logo/unnamed.png') }}" alt="Logo Bina Desa" class="logo-img">
+                        </div>
+
                         <h4>
                             <i class="bi bi-shield-lock"></i>
                             Login Admin

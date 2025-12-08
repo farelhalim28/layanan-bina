@@ -502,16 +502,16 @@
                     {{-- Action Buttons --}}
                     <div class="riwayat-actions">
                         <a href="{{ route('admin.riwayat-status.show', $item->riwayat_id) }}" class="btn-action btn-detail">
-                            <i class="bi bi-eye-fill"></i> Detail
+                            <i class="bi bi-eye-fill"></i>
                         </a>
                         <a href="{{ route('admin.riwayat-status.edit', $item->riwayat_id) }}" class="btn-action btn-edit">
-                            <i class="bi bi-pencil-fill"></i> Edit
+                            <i class="bi bi-pencil-fill"></i>
                         </a>
                         <form action="{{ route('admin.riwayat-status.destroy', $item->riwayat_id) }}" method="POST" style="flex: 1; max-width: 80px;"
                             onsubmit="return confirm('Yakin hapus data ini?')">
                             @csrf @method('DELETE')
                             <button type="submit" class="btn-action btn-delete w-100">
-                                <i class="bi bi-trash-fill"></i> Hapus
+                                <i class="bi bi-trash-fill"></i>
                             </button>
                         </form>
                     </div>

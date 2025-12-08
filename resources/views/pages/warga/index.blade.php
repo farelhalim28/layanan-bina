@@ -46,6 +46,7 @@
         font-weight: 600;
         transition: all 0.3s;
         box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+        text-decoration: none;
     }
 
     .btn-add-floating:hover {
@@ -115,163 +116,153 @@
         color: white;
     }
 
-    /* WARGA GRID LAYOUT */
-    .warga-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-        gap: 25px;
-        margin-top: 20px;
-    }
-
-    .warga-card {
+    /* MODERN TABLE STYLING */
+    .table-container {
         background: white;
-        border-radius: 16px;
-        padding: 25px;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-        position: relative;
+        border-radius: 20px;
+        padding: 0;
+        box-shadow: 0 8px 30px rgba(0,0,0,0.08);
         overflow: hidden;
+    }
+
+    .modern-table {
+        margin: 0;
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+    }
+
+    .modern-table thead {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+
+    .modern-table thead th {
+        padding: 20px 18px;
+        font-weight: 700;
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: white;
+        border: none;
+        white-space: nowrap;
+    }
+
+    .modern-table thead th:first-child {
+        border-radius: 0;
+    }
+
+    .modern-table thead th:last-child {
+        border-radius: 0;
+    }
+
+    .modern-table tbody tr {
+        transition: all 0.3s;
+        border-bottom: 1px solid #f1f5f9;
+    }
+
+    .modern-table tbody tr:hover {
+        background: linear-gradient(90deg, #f8fafc 0%, #f1f5f9 100%);
+        transform: scale(1.01);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+
+    .modern-table tbody td {
+        padding: 18px;
+        vertical-align: middle;
+        font-size: 13px;
+        color: #1e293b;
+        border: none;
+    }
+
+    .avatar-cell {
         display: flex;
-        flex-direction: column;
+        align-items: center;
+        gap: 12px;
     }
 
-    .warga-card::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 4px;
-        background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
-    }
-
-    .warga-card:hover {
-        transform: translateY(-12px);
-        box-shadow: 0 16px 40px rgba(0,0,0,0.15);
-    }
-
-    .warga-header {
-        display: flex;
-        align-items: flex-start;
-        gap: 16px;
-        margin-bottom: 20px;
-    }
-
-    .warga-avatar {
-        width: 70px;
-        height: 70px;
-        border-radius: 14px;
+    .table-avatar {
+        width: 45px;
+        height: 45px;
+        border-radius: 12px;
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         display: flex;
         align-items: center;
         justify-content: center;
         color: white;
         font-weight: 800;
-        font-size: 32px;
+        font-size: 18px;
         flex-shrink: 0;
         box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
     }
 
-    .warga-info h4 {
-        margin: 0 0 8px 0;
-        font-size: 16px;
-        font-weight: 700;
-        color: #1e293b;
+    .name-info {
+        display: flex;
+        flex-direction: column;
     }
 
-    .warga-info p {
-        margin: 0 0 6px 0;
-        font-size: 12px;
+    .name-info strong {
+        font-weight: 700;
+        color: #1e293b;
+        font-size: 14px;
+        margin-bottom: 3px;
+    }
+
+    .name-info small {
         color: #94a3b8;
+        font-size: 11px;
         font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
     }
 
     .nik-badge {
         display: inline-block;
         background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
         color: white;
-        padding: 4px 12px;
+        padding: 6px 14px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 700;
+        white-space: nowrap;
+    }
+
+    .gender-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 12px;
         border-radius: 20px;
         font-size: 11px;
         font-weight: 700;
+        white-space: nowrap;
     }
 
-    .warga-details {
-        flex: 1;
-        padding: 18px;
-        background: #f8fafc;
-        border-radius: 12px;
-        margin-bottom: 20px;
-    }
-
-    .detail-row {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-        padding: 10px 0;
-        font-size: 13px;
-    }
-
-    .detail-label {
-        color: #94a3b8;
-        font-weight: 600;
-        min-width: 80px;
-    }
-
-    .detail-value {
-        color: #1e293b;
-        font-weight: 600;
-        text-align: right;
-        word-break: break-word;
-    }
-
-    .detail-row:not(:last-child) {
-        border-bottom: 1px solid #e2e8f0;
-    }
-
-    .info-tag {
-        display: inline-block;
-        padding: 4px 10px;
-        border-radius: 6px;
-        font-size: 11px;
-        font-weight: 700;
-        background: #e0f2fe;
-        color: #0284c7;
-        margin-right: 6px;
-    }
-
-    .info-tag.gender-male {
+    .gender-male {
         background: #dbeafe;
         color: #1e40af;
     }
 
-    .info-tag.gender-female {
+    .gender-female {
         background: #fce7f3;
         color: #be185d;
     }
 
-    .warga-actions {
+    .action-buttons {
         display: flex;
         gap: 8px;
-        padding-top: 20px;
-        border-top: 2px solid #f1f5f9;
+        justify-content: flex-end;
     }
 
-    .btn-action-card {
-        flex: 1;
-        padding: 10px;
+    .btn-action {
+        padding: 8px 14px;
         border-radius: 10px;
         border: none;
         font-weight: 600;
-        font-size: 13px;
+        font-size: 12px;
         transition: all 0.3s;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 6px;
         cursor: pointer;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
     }
 
     .btn-view {
@@ -308,12 +299,8 @@
     }
 
     .empty-state {
-        grid-column: 1 / -1;
         text-align: center;
         padding: 80px 20px;
-        background: white;
-        border-radius: 20px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
     }
 
     .empty-state i {
@@ -340,25 +327,51 @@
         box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
     }
 
+    /* Responsive */
     @media (max-width: 768px) {
-        .warga-grid {
-            grid-template-columns: 1fr;
-        }
-
         .modern-header {
             flex-direction: column;
             gap: 20px;
             text-align: center;
         }
 
-        .detail-row {
-            flex-direction: column;
-            gap: 4px;
+        .table-container {
+            overflow-x: auto;
         }
 
-        .detail-value {
-            text-align: left;
+        .modern-table {
+            min-width: 1000px;
         }
+
+        .action-buttons {
+            flex-direction: column;
+        }
+    }
+
+    /* Pagination styling */
+    .pagination {
+        margin-top: 25px;
+        justify-content: center;
+    }
+
+    .page-link {
+        border: 2px solid #e2e8f0;
+        color: #667eea;
+        margin: 0 4px;
+        border-radius: 10px;
+        font-weight: 600;
+        transition: all 0.3s;
+    }
+
+    .page-link:hover {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border-color: #667eea;
+    }
+
+    .page-item.active .page-link {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-color: #667eea;
     }
 </style>
 
@@ -437,70 +450,87 @@
             </form>
         </div>
 
-        {{-- Warga Grid --}}
-        <div class="warga-grid">
-            @forelse($warga as $item)
-                <div class="warga-card">
-                    {{-- Warga Header --}}
-                    <div class="warga-header">
-                        <div class="warga-avatar">
-                            {{ strtoupper(substr($item->nama, 0, 1)) }}
-                        </div>
-                        <div class="warga-info" style="flex: 1;">
-                            <h4>{{ $item->nama }}</h4>
-                            <p>NIK</p>
-                            <span class="nik-badge">{{ $item->no_ktp }}</span>
-                        </div>
-                    </div>
-
-                    {{-- Warga Details --}}
-                    <div class="warga-details">
-                        <div class="detail-row">
-                            <span class="detail-label">Email</span>
-                            <span class="detail-value">{{ $item->email ?? '-' }}</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-label">Telepon</span>
-                            <span class="detail-value">{{ $item->telp ?? '-' }}</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-label">Gender</span>
-                            <span class="info-tag {{ $item->jenis_kelamin == 'L' ? 'gender-male' : 'gender-female' }}">
-                                {{ $item->jenis_kelamin == 'L' ? '👨 Laki-laki' : '👩 Perempuan' }}
-                            </span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-label">Agama</span>
-                            <span class="detail-value">{{ $item->agama }}</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-label">Pekerjaan</span>
-                            <span class="detail-value">{{ $item->pekerjaan }}</span>
-                        </div>
-                    </div>
-
-                    {{-- Actions --}}
-                    <div class="warga-actions">
-                        <a href="{{ route('admin.warga.show', $item->warga_id) }}"
-                           class="btn-action-card btn-view">
-                            <i class="bi bi-eye-fill"></i> Detail
-                        </a>
-                        <a href="{{ route('admin.warga.edit', $item->warga_id) }}"
-                           class="btn-action-card btn-edit">
-                            <i class="bi bi-pencil-fill"></i> Edit
-                        </a>
-                        <form action="{{ route('admin.warga.destroy', $item->warga_id) }}"
-                              method="POST" class="d-inline" style="flex: 1;"
-                              onsubmit="return confirm('Yakin hapus warga ini?')">
-                            @csrf @method('DELETE')
-                            <button type="submit" class="btn-action-card btn-delete w-100">
-                                <i class="bi bi-trash-fill"></i> Hapus
-                            </button>
-                        </form>
-                    </div>
-                </div>
-
-            @empty
+        {{-- Modern Table --}}
+        <div class="table-container">
+            @if($warga->count() > 0)
+                <table class="modern-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 50px;">#</th>
+                            <th style="width: 250px;">Nama</th>
+                            <th style="width: 180px;">NIK</th>
+                            <th style="width: 200px;">Email</th>
+                            <th style="width: 140px;">Telepon</th>
+                            <th style="width: 120px;">Gender</th>
+                            <th style="width: 120px;">Agama</th>
+                            <th style="width: 150px;">Pekerjaan</th>
+                            <th style="width: 200px; text-align: center;">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($warga as $index => $item)
+                            <tr>
+                                <td>
+                                    <strong style="color: #667eea;">{{ $warga->firstItem() + $index }}</strong>
+                                </td>
+                                <td>
+                                    <div class="avatar-cell">
+                                        <div class="table-avatar">
+                                            {{ strtoupper(substr($item->nama, 0, 1)) }}
+                                        </div>
+                                        <div class="name-info">
+                                            <strong>{{ $item->nama }}</strong>
+                                            <small>ID: {{ $item->warga_id }}</small>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="nik-badge">{{ $item->no_ktp }}</span>
+                                </td>
+                                <td>
+                                    <span style="color: #64748b; font-weight: 500;">{{ $item->email ?? '-' }}</span>
+                                </td>
+                                <td>
+                                    <span style="color: #64748b; font-weight: 500;">{{ $item->telp ?? '-' }}</span>
+                                </td>
+                                <td>
+                                    <span class="gender-badge {{ $item->jenis_kelamin == 'L' ? 'gender-male' : 'gender-female' }}">
+                                        {{ $item->jenis_kelamin == 'L' ? '👨 Laki' : '👩 Perempuan' }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <span style="font-weight: 600;">{{ $item->agama }}</span>
+                                </td>
+                                <td>
+                                    <span style="color: #64748b; font-weight: 500;">{{ $item->pekerjaan }}</span>
+                                </td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <a href="{{ route('admin.warga.show', $item->warga_id) }}"
+                                           class="btn-action btn-view"
+                                           title="Detail">
+                                            <i class="bi bi-eye-fill"></i>
+                                        </a>
+                                        <a href="{{ route('admin.warga.edit', $item->warga_id) }}"
+                                           class="btn-action btn-edit"
+                                           title="Edit">
+                                            <i class="bi bi-pencil-fill"></i>
+                                        </a>
+                                        <form action="{{ route('admin.warga.destroy', $item->warga_id) }}"
+                                              method="POST" class="d-inline"
+                                              onsubmit="return confirm('Yakin hapus warga ini?')">
+                                            @csrf @method('DELETE')
+                                            <button type="submit" class="btn-action btn-delete" title="Hapus">
+                                                <i class="bi bi-trash-fill"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            @else
                 <div class="empty-state">
                     <i class="bi bi-inbox"></i>
                     <h4>
@@ -511,7 +541,7 @@
                         @endif
                     </h4>
                 </div>
-            @endforelse
+            @endif
         </div>
 
         {{-- Pagination --}}
