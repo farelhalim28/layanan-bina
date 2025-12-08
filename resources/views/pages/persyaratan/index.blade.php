@@ -46,6 +46,7 @@
         font-weight: 600;
         transition: all 0.3s;
         box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+        text-decoration: none;
     }
 
     .btn-add-floating:hover {
@@ -125,68 +126,90 @@
     .berkas-card {
         background: white;
         border-radius: 16px;
-        padding: 20px;
+        padding: 24px;
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        gap: 20px;
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-        border-left: 4px solid #667eea;
+        border-left: 4px solid transparent;
+    }
+
+    .berkas-card.valid {
+        border-left-color: #10b981;
+    }
+
+    .berkas-card.invalid {
+        border-left-color: #ef4444;
     }
 
     .berkas-card:hover {
-        transform: translateX(8px);
+        transform: translateY(-4px);
         box-shadow: 0 12px 35px rgba(0,0,0,0.12);
     }
 
-    .berkas-left {
-        display: flex;
-        align-items: center;
-        gap: 18px;
-        flex: 1;
-    }
-
-    .file-preview {
-        width: 70px;
-        height: 70px;
-        border-radius: 12px;
-        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    /* Icon Circle */
+    .status-icon {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 32px;
-        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        font-size: 28px;
+        color: white;
         flex-shrink: 0;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     }
 
-    .file-preview.image {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    .status-icon.valid {
+        background: linear-gradient(135deg, #10b981 0%, #059669 100%);
     }
 
-    .file-preview.pdf {
-        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    .status-icon.invalid {
+        background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
     }
 
-    .file-preview img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        border-radius: 12px;
+    /* Content */
+    .berkas-content {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .berkas-info {
+        flex: 1;
     }
 
     .berkas-info h4 {
-        margin: 0 0 8px 0;
+        margin: 0 0 4px 0;
         font-size: 16px;
         font-weight: 700;
         color: #1e293b;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .file-type-badge {
+        display: inline-block;
+        padding: 4px 10px;
+        border-radius: 6px;
+        font-size: 10px;
+        font-weight: 700;
+        text-transform: uppercase;
+        background: #dbeafe;
+        color: #1e40af;
     }
 
     .berkas-meta {
         font-size: 13px;
         color: #64748b;
         display: flex;
-        gap: 12px;
+        gap: 16px;
         flex-wrap: wrap;
+        margin-top: 8px;
     }
 
     .meta-item {
@@ -197,21 +220,19 @@
 
     .meta-item i {
         color: #667eea;
-        font-weight: 600;
+        font-size: 14px;
     }
 
-    .berkas-right {
-        display: flex;
-        align-items: center;
-        gap: 16px;
-    }
-
+    /* Status Badge */
     .status-badge {
         padding: 8px 16px;
-        border-radius: 12px;
+        border-radius: 20px;
         font-weight: 700;
         font-size: 12px;
-        display: inline-block;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        flex-shrink: 0;
     }
 
     .status-valid {
@@ -224,8 +245,11 @@
         color: #dc2626;
     }
 
-    .action-dropdown {
-        position: relative;
+    /* Action Buttons */
+    .berkas-actions {
+        display: flex;
+        gap: 8px;
+        flex-shrink: 0;
     }
 
     .action-btn {
@@ -233,41 +257,46 @@
         height: 40px;
         border-radius: 10px;
         border: none;
-        background: #f1f5f9;
-        color: #64748b;
-        cursor: pointer;
         display: flex;
         align-items: center;
         justify-content: center;
         transition: all 0.3s;
+        cursor: pointer;
+        font-size: 16px;
+        text-decoration: none;
     }
 
-    .action-btn:hover {
-        background: #e2e8f0;
-        color: #667eea;
+    .action-btn.view {
+        background: #dbeafe;
+        color: #1e40af;
     }
 
-    .dropdown-menu {
-        border-radius: 12px;
-        border: 1px solid #e2e8f0;
-        box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    .action-btn.view:hover {
+        background: #1e40af;
+        color: white;
+        transform: translateY(-2px);
     }
 
-    .dropdown-item {
-        padding: 10px 16px;
-        font-size: 13px;
-        font-weight: 500;
-        transition: all 0.2s;
+    .action-btn.edit {
+        background: #fef3c7;
+        color: #d97706;
     }
 
-    .dropdown-item:hover {
-        background: #f1f5f9;
-        color: #667eea;
+    .action-btn.edit:hover {
+        background: #d97706;
+        color: white;
+        transform: translateY(-2px);
     }
 
-    .dropdown-item.text-danger:hover {
+    .action-btn.delete {
         background: #fee2e2;
         color: #dc2626;
+    }
+
+    .action-btn.delete:hover {
+        background: #dc2626;
+        color: white;
+        transform: translateY(-2px);
     }
 
     .empty-state {
@@ -309,15 +338,20 @@
             text-align: center;
         }
 
-        .berkas-right {
-            flex-direction: column;
-            gap: 10px;
-        }
-
         .berkas-card {
             flex-direction: column;
             align-items: flex-start;
-            gap: 16px;
+        }
+
+        .berkas-content {
+            flex-direction: column;
+            align-items: flex-start;
+            width: 100%;
+        }
+
+        .berkas-actions {
+            width: 100%;
+            justify-content: flex-end;
         }
     }
 </style>
@@ -390,77 +424,76 @@
         {{-- Berkas List --}}
         <div class="berkas-list">
             @forelse($berkas_persyaratan as $berkas)
-                <div class="berkas-card">
-                    <div class="berkas-left">
-                        {{-- File Preview --}}
-                        <div class="file-preview {{ Str::endsWith($berkas->file_path, ['.jpg', '.png', '.jpeg']) ? 'image' : 'pdf' }}">
-                            @if($berkas->file_path && file_exists(public_path('uploads/berkas/' . $berkas->file_path)))
-                                @if(Str::endsWith($berkas->file_path, ['.jpg', '.png', '.jpeg']))
-                                    <img src="{{ asset('uploads/berkas/' . $berkas->file_path) }}" alt="{{ $berkas->nama_berkas }}">
-                                @else
-                                    <i class="bi bi-file-earmark-pdf"></i>
-                                @endif
-                            @else
-                                <i class="bi bi-file-earmark"></i>
-                            @endif
-                        </div>
+                <div class="berkas-card {{ $berkas->valid ? 'valid' : 'invalid' }}">
+                    {{-- Status Icon Circle --}}
+                    <div class="status-icon {{ $berkas->valid ? 'valid' : 'invalid' }}">
+                        @if($berkas->valid)
+                            <i class="bi bi-check-circle-fill"></i>
+                        @else
+                            <i class="bi bi-x-circle-fill"></i>
+                        @endif
+                    </div>
 
-                        {{-- Info --}}
+                    {{-- Content --}}
+                    <div class="berkas-content">
                         <div class="berkas-info">
-                            <h4>{{ $berkas->nama_berkas }}</h4>
+                            <h4>
+                                <i class="bi bi-file-earmark-text"></i>
+                                {{ $berkas->nama_berkas }}
+                                @php
+                                    $ext = pathinfo($berkas->file_path, PATHINFO_EXTENSION);
+                                @endphp
+                                <span class="file-type-badge">{{ strtoupper($ext) }}</span>
+                            </h4>
                             <div class="berkas-meta">
                                 <div class="meta-item">
-                                    <i class="bi bi-file-earmark"></i>
-                                    <span>#{{ $berkas->permohonanSurat->nomor_permohonan ?? '-' }}</span>
+                                    <i class="bi bi-hash"></i>
+                                    <span>{{ $berkas->permohonanSurat->nomor_permohonan ?? '-' }}</span>
                                 </div>
                                 <div class="meta-item">
-                                    <i class="bi bi-person"></i>
+                                    <i class="bi bi-person-fill"></i>
                                     <span>{{ $berkas->permohonanSurat->pemohon->nama ?? '-' }}</span>
+                                </div>
+                                <div class="meta-item">
+                                    <i class="bi bi-calendar-event"></i>
+                                    <span>{{ $berkas->created_at->format('d M Y - H:i') }}</span>
                                 </div>
                             </div>
                         </div>
+
+                        {{-- Status Badge --}}
+                        <span class="status-badge status-{{ $berkas->valid ? 'valid' : 'invalid' }}">
+                            @if($berkas->valid)
+                                <i class="bi bi-check-circle-fill"></i>
+                                Valid
+                            @else
+                                <i class="bi bi-x-circle-fill"></i>
+                                Tidak Valid
+                            @endif
+                        </span>
                     </div>
 
-                    <div class="berkas-right">
-                        {{-- Status Badge --}}
-                        @if($berkas->valid)
-                            <span class="status-badge status-valid">
-                                <i class="bi bi-check-circle"></i> Valid
-                            </span>
-                        @else
-                            <span class="status-badge status-invalid">
-                                <i class="bi bi-x-circle"></i> Tidak Valid
-                            </span>
-                        @endif
-
-                        {{-- Action Menu --}}
-                        <div class="action-dropdown dropdown">
-                            <button class="action-btn" data-bs-toggle="dropdown">
-                                <i class="bi bi-three-dots-vertical"></i>
+                    {{-- Action Buttons --}}
+                    <div class="berkas-actions">
+                        <a href="{{ route('admin.berkas-persyaratan.show', $berkas->berkas_id) }}"
+                           class="action-btn view"
+                           title="Detail">
+                            <i class="bi bi-eye-fill"></i>
+                        </a>
+                        <a href="{{ route('admin.berkas-persyaratan.edit', $berkas->berkas_id) }}"
+                           class="action-btn edit"
+                           title="Edit">
+                            <i class="bi bi-pencil-fill"></i>
+                        </a>
+                        <form action="{{ route('admin.berkas-persyaratan.destroy', $berkas->berkas_id) }}"
+                              method="POST"
+                              class="d-inline"
+                              onsubmit="return confirm('Yakin ingin menghapus berkas ini?')">
+                            @csrf @method('DELETE')
+                            <button type="submit" class="action-btn delete" title="Hapus">
+                                <i class="bi bi-trash-fill"></i>
                             </button>
-                            <ul class="dropdown-menu dropdown-menu-end">
-                                <li>
-                                    <a class="dropdown-item" href="{{ route('admin.berkas-persyaratan.show', $berkas->berkas_id) }}">
-                                        <i class="bi bi-eye"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="{{ route('admin.berkas-persyaratan.edit', $berkas->berkas_id) }}">
-                                        <i class="bi bi-pencil"></i>
-                                    </a>
-                                </li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li>
-                                    <form action="{{ route('admin.berkas-persyaratan.destroy', $berkas->berkas_id) }}" method="POST"
-                                        onsubmit="return confirm('Yakin ingin menghapus berkas ini?')">
-                                        @csrf @method('DELETE')
-                                        <button type="submit" class="dropdown-item text-danger">
-                                            <i class="bi bi-trash"></i>
-                                        </button>
-                                    </form>
-                                </li>
-                            </ul>
-                        </div>
+                        </form>
                     </div>
                 </div>
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -13,13 +14,9 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        // Kolom yang bisa di-search
         $searchableColumns = ['name', 'email'];
-
-        // Query dengan filter custom, search, dan pagination
         $query = User::query();
 
-        // Filter berdasarkan status verifikasi email
         if ($request->filled('email_verified')) {
             if ($request->email_verified == 'verified') {
                 $query->whereNotNull('email_verified_at');
@@ -28,12 +25,10 @@ class UserController extends Controller
             }
         }
 
-        // TAMBAHAN: Filter berdasarkan role
         if ($request->filled('role')) {
             $query->where('role', $request->role);
         }
 
-        // Search
         $users = $query->search($request, $searchableColumns)
                        ->latest()
                        ->paginate(10)
@@ -59,17 +54,25 @@ class UserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:8|confirmed',
-            'role' => 'required|in:Super Admin,Admin,User', // TAMBAHAN
+            'role' => 'required|in:Super Admin,Admin,User',
+            'profile_picture' => 'nullable|image|mimes:jpg,jpeg,png|max:2048', // ← TAMBAHAN
         ], [
             'name.required' => 'Nama wajib diisi',
             'email.required' => 'Email wajib diisi',
             'email.unique' => 'Email sudah terdaftar',
             'password.required' => 'Password wajib diisi',
             'password.confirmed' => 'Konfirmasi password tidak cocok',
-            'role.required' => 'Role wajib dipilih', // TAMBAHAN
+            'role.required' => 'Role wajib dipilih',
+            'profile_picture.image' => 'File harus berupa gambar',
+            'profile_picture.max' => 'Ukuran gambar maksimal 2MB',
         ]);
 
         $validated['password'] = Hash::make($validated['password']);
+
+        // Upload profile picture
+        if ($request->hasFile('profile_picture')) {
+            $validated['profile_picture'] = $request->file('profile_picture')->store('profile-pictures', 'public');
+        }
 
         User::create($validated);
 
@@ -106,13 +109,23 @@ class UserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email,' . $id,
             'password' => 'nullable|min:8|confirmed',
-            'role' => 'required|in:Super Admin,Admin,User', // TAMBAHAN
+            'role' => 'required|in:Super Admin,Admin,User',
+            'profile_picture' => 'nullable|image|mimes:jpg,jpeg,png|max:2048', // ← TAMBAHAN
         ]);
 
         if (!empty($validated['password'])) {
             $validated['password'] = Hash::make($validated['password']);
         } else {
             unset($validated['password']);
+        }
+
+        // Upload profile picture baru
+        if ($request->hasFile('profile_picture')) {
+            // Hapus foto lama
+            if ($user->profile_picture) {
+                Storage::disk('public')->delete($user->profile_picture);
+            }
+            $validated['profile_picture'] = $request->file('profile_picture')->store('profile-pictures', 'public');
         }
 
         $user->update($validated);
@@ -127,6 +140,12 @@ class UserController extends Controller
     public function destroy($id)
     {
         $user = User::findOrFail($id);
+
+        // Hapus profile picture
+        if ($user->profile_picture) {
+            Storage::disk('public')->delete($user->profile_picture);
+        }
+
         $user->delete();
 
         return redirect()->route('admin.user.index')

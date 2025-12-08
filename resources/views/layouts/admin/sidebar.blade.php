@@ -28,7 +28,7 @@
 
     /* Header Logo */
     .sidebar-header {
-        padding: 20px;
+        padding: 24px 20px;
         border-bottom: 2px solid #f1f5f9;
         background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
     }
@@ -36,28 +36,31 @@
     .logo {
         display: flex;
         align-items: center;
-        gap: 12px;
+        gap: 14px;
     }
 
     .logo a {
         text-decoration: none;
         display: flex;
         align-items: center;
-        gap: 12px;
+        gap: 14px;
         width: 100%;
     }
 
-    .logo-img {
-        width: 50px;
-        height: 50px;
-        object-fit: contain;
-        border-radius: 12px;
-        padding: 8px;
-        background: white;
-        flex-shrink: 0;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-        border: 2px solid #e2e8f0;
+    .sidebar .logo-img {
+    width: 120px !important;
+    height: auto !important;
+    max-width: 120px !important;
+    object-fit: contain !important;
+    display: block;
     }
+
+
+    .logo img {
+    max-width: 100%;
+    height: auto;
+    }
+
 
     .logo-text {
         display: flex;
@@ -66,7 +69,7 @@
 
     .logo h4 {
         margin: 0;
-        font-size: 20px;
+        font-size: 18px;
         font-weight: 800;
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         -webkit-background-clip: text;
@@ -76,8 +79,8 @@
     }
 
     .logo p {
-        margin: 4px 0 0 0;
-        font-size: 11px;
+        margin: 2px 0 0 0;
+        font-size: 10px;
         color: #94a3b8;
         font-weight: 600;
         text-transform: uppercase;

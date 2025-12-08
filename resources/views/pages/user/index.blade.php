@@ -161,6 +161,16 @@
         width: 70px;
         height: 70px;
         border-radius: 14px;
+        object-fit: cover;
+        flex-shrink: 0;
+        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        border: 3px solid white;
+    }
+
+    .user-avatar-placeholder {
+        width: 70px;
+        height: 70px;
+        border-radius: 14px;
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         display: flex;
         align-items: center;
@@ -432,9 +442,15 @@
                 <div class="user-card">
                     {{-- User Header --}}
                     <div class="user-header">
-                        <div class="user-avatar">
-                            {{ strtoupper(substr($user->name, 0, 1)) }}
-                        </div>
+                        @if($user->profile_picture)
+                            <img src="{{ $user->profile_picture_url }}"
+                                 alt="{{ $user->name }}"
+                                 class="user-avatar">
+                        @else
+                            <div class="user-avatar-placeholder">
+                                {{ strtoupper(substr($user->name, 0, 1)) }}
+                            </div>
+                        @endif
                         <div class="user-info" style="flex: 1;">
                             <h4>{{ $user->name }}</h4>
                             <p>{{ $user->email }}</p>
@@ -469,22 +485,26 @@
                         </div>
                     </div>
 
-                    {{-- Actions --}}
+                    {{-- Actions - HANYA ICON --}}
                     <div class="user-actions">
                         <a href="{{ route('admin.user.show', $user->id) }}"
-                           class="btn-action-card btn-view">
+                           class="btn-action-card btn-view"
+                           title="Detail">
                             <i class="bi bi-eye-fill"></i>
                         </a>
                         <a href="{{ route('admin.user.edit', $user->id) }}"
-                           class="btn-action-card btn-edit">
+                           class="btn-action-card btn-edit"
+                           title="Edit">
                             <i class="bi bi-pencil-fill"></i>
                         </a>
                         <form action="{{ route('admin.user.destroy', $user->id) }}"
                               method="POST" class="d-inline" style="flex: 1;"
                               onsubmit="return confirm('Yakin hapus user ini?')">
                             @csrf @method('DELETE')
-                            <button type="submit" class="btn-action-card btn-delete w-100">
-                                <i class="bi bi-trash-fill"></i> 
+                            <button type="submit"
+                                    class="btn-action-card btn-delete w-100"
+                                    title="Hapus">
+                                <i class="bi bi-trash-fill"></i>
                             </button>
                         </form>
                     </div>

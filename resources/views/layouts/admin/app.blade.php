@@ -1,4 +1,12 @@
 <!-- FILE: resources/views/layouts/admin/app.blade.php -->
+<!--
+    Template Name: Mazer Admin Dashboard
+    URL: https://github.com/zuramai/mazer
+    Author: Zuraiz
+    License: MIT License
+-->
+
+<!-- FILE: resources/views/layouts/admin/app.blade.php -->
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -39,20 +47,23 @@
             overflow-y: auto;
             overflow-x: visible;
             position: relative;
+            padding: 20px;
         }
 
         /* HEADER MODERN STYLE */
         .header-modern {
             background: white;
-            border-bottom: 1px solid #e2e8f0;
+            border: 1px solid #e2e8f0;
             padding: 16px 30px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
             position: sticky;
             top: 0;
             z-index: 100;
+            margin: 20px 20px 0 20px;
+            border-radius: 20px;
         }
 
         .header-left {
@@ -98,23 +109,6 @@
             display: flex;
             align-items: center;
             gap: 25px;
-        }
-
-        /* Search Bar */
-        .header-search {
-            display: none;
-            background: #f8fafc;
-            border: 2px solid #e2e8f0;
-            border-radius: 12px;
-            padding: 8px 16px;
-            width: 280px;
-            transition: all 0.3s;
-        }
-
-        .header-search:focus {
-            border-color: #667eea;
-            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
-            background: white;
         }
 
         /* Notification Icon */
@@ -329,6 +323,12 @@
         @media (max-width: 768px) {
             .header-modern {
                 padding: 12px 16px;
+                margin: 10px;
+                border-radius: 16px;
+            }
+
+            .page-content {
+                padding: 15px;
             }
 
             .header-brand {
@@ -337,10 +337,6 @@
 
             .burger-btn {
                 display: block;
-            }
-
-            .header-search {
-                display: none;
             }
 
             .user-info {
