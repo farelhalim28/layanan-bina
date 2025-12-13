@@ -1,6 +1,6 @@
 @extends('layouts.admin.app')
 
-@section('title', 'Dashboard - Bina Desa')
+@section('title', 'Dashboard - Layanan Mandiri & Surat')
 
 @section('content')
 @php
@@ -475,7 +475,7 @@
 
     {{-- Content --}}
     <div class="banner-content">
-        <h2>👋 Selamat Datang, {{ $user['nama'] ?? 'Admin' }}!</h2>
+        <h2> Selamat Datang, {{ $user['nama'] ?? 'Admin' }}!</h2>
         <p>Dashboard Monitoring Sistem Layanan Mandiri & Surat - Bina Desa</p>
     </div>
 

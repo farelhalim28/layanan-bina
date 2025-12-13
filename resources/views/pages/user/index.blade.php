@@ -397,7 +397,17 @@
         <div class="filter-card">
             <form method="GET" action="{{ route('admin.user.index') }}">
                 <div class="row g-3 align-items-end">
-                    <div class="col-md-3">
+                    <div class="col-md-2">
+                        <div class="filter-label">Filter Role</div>
+                        <select name="role" class="form-select-custom" onchange="this.form.submit()">
+                            <option value="">Semua Role</option>
+                            <option value="Super Admin" {{ request('role') == 'Super Admin' ? 'selected' : '' }}>Super Admin</option>
+                            <option value="Admin" {{ request('role') == 'Admin' ? 'selected' : '' }}>Admin</option>
+                            <option value="User" {{ request('role') == 'User' ? 'selected' : '' }}>User</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-2">
                         <div class="filter-label">Status Verifikasi</div>
                         <select name="email_verified" class="form-select-custom" onchange="this.form.submit()">
                             <option value="">Semua Status</option>
@@ -406,7 +416,7 @@
                         </select>
                     </div>
 
-                    <div class="col-md-5">
+                    <div class="col-md-4">
                         <div class="filter-label">Pencarian</div>
                         <div class="input-group">
                             <span class="input-group-text" style="background: #f8fafc; border: 2px solid #e2e8f0; border-right: none; border-radius: 12px 0 0 12px;">
@@ -426,7 +436,7 @@
                     </div>
 
                     <div class="col-md-2">
-                        @if(request('search') || request('email_verified'))
+                        @if(request('search') || request('email_verified') || request('role'))
                             <a href="{{ route('admin.user.index') }}" class="btn-reset-custom w-100">
                                 <i class="bi bi-x-circle"></i> Reset
                             </a>

@@ -98,6 +98,7 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            color: white;
         }
 
         .info-subtitle {
@@ -106,6 +107,7 @@
             opacity: 0.9;
             line-height: 1.6;
             flex-grow: 1;
+            color: white;
         }
 
         .info-details {
@@ -154,11 +156,13 @@
             letter-spacing: 0.8px;
             display: block;
             margin-bottom: 2px;
+            color: white;
         }
 
         .info-detail-text {
             font-size: 12px;
             opacity: 0.95;
+            color: white;
         }
 
         /* RIGHT SIDE - LOGIN FORM */
@@ -209,12 +213,14 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
+            color: white;
         }
 
         .card-header-auth p {
             font-size: 12px;
             margin: 0;
             opacity: 0.9;
+            color: white;
         }
 
         .card-body-auth {

@@ -5,9 +5,9 @@
         <button class="burger-btn d-block d-xl-none">
             <i class="bi bi-list"></i>
         </button>
-        <h6 class="header-brand">
-            <i class="bi bi-house-fill"></i>
-            <span>Bina Desa</span>
+        <h6 class="header-brand" >
+            <i class="bi bi-house-fill" ></i>
+            <span> Layanan Mandiri & Surat </span>
         </h6>
     </div>
 

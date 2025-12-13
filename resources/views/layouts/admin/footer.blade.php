@@ -264,8 +264,8 @@
     <div class="developer-container">
         {{-- Title --}}
         <div class="developer-title">
-            <h2>👨‍💻 Pengembang Sistem</h2>
-            <p>Dibuat dengan ❤️ untuk Sistem Bina Desa</p>
+            <h2> Pengembang Sistem</h2>
+            <p>Dibuat untuk Sistem Bina Desa</p>
         </div>
 
         {{-- Developer Card --}}
@@ -361,7 +361,7 @@
 
         {{-- Copyright --}}
         <div class="copyright-text">
-            © 2025 Sistem Bina Desa - Desa Penyasawan | Developed by <strong>Nama Anda</strong>
+            © 2025 Sistem Bina Desa - Desa Penyasawan | Developed by <strong>Farel Abdul Halim</strong>
             <br>
             <small>Platform Layanan Mandiri & Surat Digital</small>
         </div>

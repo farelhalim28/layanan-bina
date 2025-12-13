@@ -47,19 +47,13 @@
         width: 100%;
     }
 
-    .sidebar .logo-img {
-    width: 120px !important;
-    height: auto !important;
-    max-width: 120px !important;
-    object-fit: contain !important;
-    display: block;
+    .sidebar-header img.logo-img {
+    width: 80px !important;
+    height: 80px !important;
+    max-width: none !important;
+    object-fit: contain;
     }
 
-
-    .logo img {
-    max-width: 100%;
-    height: auto;
-    }
 
 
     .logo-text {
@@ -86,6 +80,10 @@
         text-transform: uppercase;
         letter-spacing: 0.5px;
     }
+    .sidebar-header .logo a {
+    align-items: center;
+    }
+
 
     /* Sidebar Menu */
     .sidebar-menu {
@@ -338,8 +336,8 @@
                 <a href="{{ route('admin.dashboard') }}">
                     <img src="{{ asset('assets-admin/images/logo/unnamed.png') }}" alt="Logo Bina Desa" class="logo-img">
                     <div class="logo-text">
-                        <h4>Bina Desa</h4>
-                        <p>Layanan Mandiri</p>
+                        <h4>SIMANDES</h4>
+                        <p>Layanan Mandiri & Surat</p>
                     </div>
                 </a>
             </div>
