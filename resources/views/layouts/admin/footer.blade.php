@@ -272,7 +272,7 @@
         <div class="developer-card">
             {{-- Photo Section --}}
             <div class="developer-photo-section">
-                <img src="{{ asset('assets-admin/images/developer/photo.jpg') }}"
+                <img src="{{ asset('assets-admin/images/bg/photo.jpg') }}"
                      alt="Developer Photo"
                      class="developer-photo"
                      onerror="this.src='https://ui-avatars.com/api/?name=Developer&size=200&background=667eea&color=fff&font-size=0.4'">
@@ -331,7 +331,7 @@
 
                 {{-- Social Links --}}
                 <div class="developer-social">
-                    <a href="www.linkedin.com/in/farel-abdul-halim-b2008439a" target="_blank" class="social-link linkedin">
+                    <a href="https://www.linkedin.com/in/farel-abdul-halim-b2008439a/" target="_blank" class="social-link linkedin">
                         <i class="bi bi-linkedin"></i>
                         <span>LinkedIn</span>
                     </a>
