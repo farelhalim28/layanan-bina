@@ -672,7 +672,7 @@
 {{-- Chart Aktivitas --}}
 <div class="card-custom">
     <div class="card-header">
-        <h4>📊 Grafik Permohonan Surat (2025)</h4>
+        <h4>📊 Grafik Permohonan Surat (2026)</h4>
     </div>
     <div class="card-body">
         <canvas id="activityChart" height="80"></canvas>

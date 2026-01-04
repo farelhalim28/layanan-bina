@@ -331,30 +331,26 @@
 
                 {{-- Social Links --}}
                 <div class="developer-social">
-                    <a href="https://linkedin.com/in/username" target="_blank" class="social-link linkedin">
+                    <a href="www.linkedin.com/in/farel-abdul-halim-b2008439a" target="_blank" class="social-link linkedin">
                         <i class="bi bi-linkedin"></i>
                         <span>LinkedIn</span>
                     </a>
 
-                    <a href="https://github.com/username" target="_blank" class="social-link github">
+                    <a href="https://github.com/farelhalim28" target="_blank" class="social-link github">
                         <i class="bi bi-github"></i>
                         <span>GitHub</span>
                     </a>
 
-                    <a href="https://instagram.com/username" target="_blank" class="social-link instagram">
+                    <a href="https://www.instagram.com/farel_jnr?igsh=aGlvMmNjcnZnOGc3" target="_blank" class="social-link instagram">
                         <i class="bi bi-instagram"></i>
                         <span>Instagram</span>
                     </a>
 
-                    <a href="mailto:developer@email.com" class="social-link email">
+                    <a href="mailto:farel24si@mahasiswa.pcr.ac.id" class="social-link email">
                         <i class="bi bi-envelope-fill"></i>
                         <span>Email</span>
                     </a>
 
-                    <a href="https://wa.me/628123456789" target="_blank" class="social-link whatsapp">
-                        <i class="bi bi-whatsapp"></i>
-                        <span>WhatsApp</span>
-                    </a>
                 </div>
             </div>
         </div>
